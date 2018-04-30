@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 
 @Component({
-  selector: 'app-demo-bin-checkbox',
-  templateUrl: './demo-bin-checkbox.component.html',
-  styleUrls: ['./demo-bin-checkbox.component.scss']
+  selector: "app-demo-bin-checkbox",
+  templateUrl: "./demo-bin-checkbox.component.html",
+  styleUrls: ["./demo-bin-checkbox.component.scss"]
 })
 export class DemoBinCheckboxComponent implements OnInit {
+  constructor() {}
 
-  constructor() { }
+  ngOnInit() {}
 
-  ngOnInit() {
-  }
+  variable: string;
 
+  variableComplex: { name: string };
 }
