@@ -1,0 +1,44 @@
+<fieldset>
+  <legend>Variable Array</legend>
+  <label>
+    <input type="checkbox" value="1" [checkedList]="variableArr" />1</label>
+  <label>
+    <input type="checkbox" value="2" [checkedList]="variableArr" />2</label>
+  <label>
+    <input type="checkbox" value="3" [checkedList]="variableArr" />3</label>
+  <label>
+    <input type="checkbox" value="4" [checkedList]="variableArr" />4</label>
+  <label>
+    <input type="checkbox" value="5" [checkedList]="variableArr" />5</label>
+  <p>Your Ans: {{variableArr|json}}</p>
+</fieldset>
+
+<fieldset>
+  <legend>Number Array</legend>
+  <label>
+    <input type="checkbox" [value]="1" [checkedList]="numArr" />1</label>
+  <label>
+    <input type="checkbox" [value]="2" [checkedList]="numArr" />2</label>
+  <label>
+    <input type="checkbox" [value]="3" [checkedList]="numArr" />3</label>
+  <label>
+    <input type="checkbox" [value]="4" [checkedList]="numArr" />4</label>
+  <label>
+    <input type="checkbox" [value]="5" [checkedList]="numArr" />5</label>
+  <p>Your Ans: {{numArr|json}}</p>
+</fieldset>
+
+<fieldset>
+  <legend>Object Array</legend>
+  <label>
+    <input type="checkbox" [value]="{name:'Bruce'}" [checkedList]="objArr" />1</label>
+  <label>
+    <input type="checkbox" [value]="{name:'Tony'}" [checkedList]="objArr" />2</label>
+  <label>
+    <input type="checkbox" [value]="{name:'Allen'}" [checkedList]="objArr" />3</label>
+  <label>
+    <input type="checkbox" [value]="{name:'Steve'}" [checkedList]="objArr" />4</label>
+  <label>
+    <input type="checkbox" [value]="{name:'Loki'}" [checkedList]="objArr" />5</label>
+  <p>Your Ans: {{objArr|json}}</p>
+</fieldset>
