@@ -1,11 +1,5 @@
 <fieldset>
   <legend>Variable</legend>
-
-  <!-- <pre class="prettyprint lang-html">
-    <label>
-        <input type="checkbox" bin-true-value="Yes" bin-false-value="No" [(model)]="variable" />Do you like comic book?</label>
-  </pre> -->
-
   <label>
     <input type="checkbox" bin-true-value="Yes" bin-false-value="No" [(model)]="variable" />Do you like comic book?</label>
   <p>Your Ans: {{variable}}</p>
@@ -14,14 +8,15 @@
 
 <fieldset>
   <legend>Variable Complex </legend>
-
-  <!-- <pre class="prettyprint lang-html">
-      <label>
-          <input type="checkbox" bin-true-value="Yes" bin-false-value="No" [(model)]="variable" />Do you like comic book?</label>
-    </pre> -->
-
   <label>
     <input type="checkbox" [bin-true-value]="{name:'Batman'}" [bin-false-value]="{name:'Wonder women'}" [(model)]="variableComplex"
     />Are you Batman?</label>
-  <p>Your name: {{variableComplex.name}}</p>
+  <p>Your name: {{variableComplex?.name}}</p>
+</fieldset>
+
+<fieldset>
+  <legend>Form Control</legend>
+  <label>
+    <input type="checkbox" bin-true-value="Batman" bin-false-value="Wonder women" [(control)]="variableControl" />Are you Batman?</label>
+  <p>Your name: {{variableControl.value}}</p>
 </fieldset>
