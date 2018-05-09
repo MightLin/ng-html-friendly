@@ -1,6 +1,6 @@
 import { AppPage } from './app.po';
 
-describe('ngx-html-friendly App', () => {
+describe('workspace-project App', () => {
   let page: AppPage;
 
   beforeEach(() => {

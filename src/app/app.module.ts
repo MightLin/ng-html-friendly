@@ -1,30 +1,25 @@
-import { BrowserModule } from "@angular/platform-browser";
-import { NgModule } from "@angular/core";
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {RouterModule} from '@angular/router';
+import {BinCheckboxModule, CheckedListModule} from 'ng-html-friendly';
 
-import { AppComponent } from "./app.component";
-import { DemoBinCheckboxComponent } from "./demo-bin-checkbox/demo-bin-checkbox.component";
-import { BinCheckboxModule } from "../../lib/bin-checkbox/bin-checkbox.module";
-import { RouterModule } from "@angular/router";
-import { appRoutes } from "./app.routes";
-import { DemoCheckedListComponent } from "./demo-checked-list/demo-checked-list.component";
-import { CheckedListModule } from "../../lib/checked-list/checked-list.module";
+import {AppComponent} from './app.component';
+import {appRoutes} from './app.routes';
+import {DemoBinCheckboxComponent} from './demo-bin-checkbox/demo-bin-checkbox.component';
+import {DemoCheckedListComponent} from './demo-checked-list/demo-checked-list.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    DemoBinCheckboxComponent,
-    DemoCheckedListComponent
-  ],
+  declarations:
+      [AppComponent, DemoCheckedListComponent, DemoBinCheckboxComponent],
   imports: [
-    BrowserModule,
-    BinCheckboxModule,
-    CheckedListModule,
+    BrowserModule, BinCheckboxModule, CheckedListModule,
     RouterModule.forRoot(
-      appRoutes,
-      { enableTracing: false, useHash: true } // <-- debugging purposes only
-    )
+        appRoutes, {enableTracing: false, useHash: true}
+        // <-- debugging purposes only
+        )
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule {
+}
