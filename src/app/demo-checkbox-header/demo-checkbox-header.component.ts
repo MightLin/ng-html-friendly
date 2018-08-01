@@ -7,20 +7,24 @@ import { CheckboxHeaderDirective } from 'dist/ng-html-friendly/public_api';
   styleUrls: ['./demo-checkbox-header.component.css']
 })
 export class DemoCheckboxHeaderComponent implements OnInit {
-  constructor() {}
+  constructor() {
+    for (var i = 0; i < 500; i++) {
+      this.arr.push(i);
+    }
+  }
 
   arr: any[] = [];
-
+  sctArr: any[] = [];
   randomArr: number[] = [];
 
   ngOnInit() {}
 
   buildArr(ch: CheckboxHeaderDirective) {
-    var count = Math.floor(Math.random() * 10) + 9;
+    var count = Math.floor(Math.random() * 100) + 10;
 
     this.randomArr = [];
     for (var i = 0; i < count; i++) {
-      this.randomArr.push(Math.floor(Math.random() * 99));
+      this.randomArr.push(Math.floor(Math.random() * 9999));
     }
     console.log(this.randomArr.length);
     ch.Refresh();

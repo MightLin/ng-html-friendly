@@ -20,16 +20,11 @@
     <label>
       <input type="checkbox" checkHeader="group2">全選</label>
   </legend>
-  <label>
-    <input type="checkbox" value="1" group2 [checkedList]="arr">1</label>
-  <label>
-    <input type="checkbox" value="2" group2 [checkedList]="arr">2</label>
-  <label>
-    <input type="checkbox" value="3" group2 [checkedList]="arr">3</label>
-  <label>
-    <input type="checkbox" value="4" group2 [checkedList]="arr">4</label>
+  <label *ngFor="let ch of arr">
+    <input type="checkbox" [value]="ch" group2 [checkedList]="sctArr">{{ch}}</label>
+
 </section>
-{{arr|json}}
+{{sctArr|json}}
 
 <hr>
 
