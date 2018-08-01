@@ -13,6 +13,7 @@
     <input type="checkbox" group1>4</label>
 </section>
 
+<hr>
 
 <section>
   <legend>
@@ -29,3 +30,15 @@
     <input type="checkbox" value="4" group2 [checkedList]="arr">4</label>
 </section>
 {{arr|json}}
+
+<hr>
+
+<section>
+  <legend>
+    <label>
+      <input type="checkbox" #chhead="checkHeader" checkHeader="group3">全選</label>
+    <button (click)="buildArr(chhead);">產生陣列</button> {{randomArr.length}}
+  </legend>
+  <label *ngFor="let ch of randomArr">
+    <input type="checkbox" [value]="ch" group3>{{ch}}</label>
+</section>

@@ -1,9 +1,10 @@
 {
   "name": "ng-html-friendly",
-  "version": "0.0.5",
+  "version": "1.0.0",
   "peerDependencies": {
     "@angular/common": ">=4.2.4",
-    "@angular/core": ">=4.2.4"
+    "@angular/core": ">=4.2.4",
+    "rxjs": ">=6.0.0"
   },
   "repository": {
     "type": "git",

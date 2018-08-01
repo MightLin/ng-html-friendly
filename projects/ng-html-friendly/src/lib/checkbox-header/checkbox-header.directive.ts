@@ -8,6 +8,7 @@ import {
   Renderer2
 } from '@angular/core';
 import { Subject, from } from 'rxjs';
+import { DoCheck } from '@angular/core';
 
 @Directive({
   selector: '[checkHeader]',
@@ -19,6 +20,7 @@ export class CheckboxHeaderDirective implements OnInit {
   checkboxHeader: HTMLInputElement;
   checkboxGroup: NodeListOf<HTMLInputElement>;
   groupClick: Subject<HTMLInputElement> = new Subject<HTMLInputElement>();
+  mustRefresh: boolean = false;
 
   constructor(
     @Self() private elementRef: ElementRef,
@@ -32,12 +34,26 @@ export class CheckboxHeaderDirective implements OnInit {
   }
 
   Refresh() {
-    let body = this.elementRef.nativeElement.closest('body') as HTMLElement;
-    this.checkboxGroup = body.querySelectorAll(
-      'input[type=checkbox][' + this.checkHeaderName + ']'
-    ) as NodeListOf<HTMLInputElement>;
-    this.registerCheckboxGroupEvent();
+    this.mustRefresh = true;
   }
+
+  ngDoCheck() {}
+
+  ngAfterContentChecked() {
+    if (this.mustRefresh) {
+      console.log('refresh');
+      let body = this.elementRef.nativeElement.closest('body') as HTMLElement;
+      this.checkboxGroup = body.querySelectorAll(
+        'input[type=checkbox][' + this.checkHeaderName + ']'
+      ) as NodeListOf<HTMLInputElement>;
+
+      // console.log(this.checkboxGroup.length);
+
+      this.registerCheckboxGroupEvent();
+      this.mustRefresh = false;
+    }
+  }
+  ngAfterViewChecked() {}
 
   private registerCheckboxHeadEvent() {
     this._renderer.listen(this.checkboxHeader, 'change', event => {
