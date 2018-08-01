@@ -2,27 +2,18 @@ import {
   Directive,
   HostListener,
   Input,
-  OnChanges,
-  SimpleChanges,
   OnInit,
   DoCheck,
   Self,
   ElementRef
-} from "@angular/core";
-import { isArray } from "util";
+} from '@angular/core';
+import { isArray } from 'util';
 
 @Directive({
   selector: 'selector: "input[checkedList][type=checkbox]"'
 })
 export class CheckedListDirective implements OnInit, DoCheck {
   ngDoCheck(): void {
-    // console.log(
-    //   "value:" +
-    //     this.value +
-    //     ",checked:" +
-    //     this._inputCheck.nativeElement.checked
-    // );
-
     if (!this._isArr) {
       let set = this.checkedList as Set<any>;
       if (set.has(this.value)) {
@@ -59,7 +50,7 @@ export class CheckedListDirective implements OnInit, DoCheck {
 
   @Input() value: any;
 
-  @HostListener("change", ["$event.target.checked", "$event"])
+  @HostListener('change', ['$event.target.checked', '$event'])
   onChange(checked: boolean, event) {
     if (!this._isArr) {
       let set = this.checkedList as Set<any>;

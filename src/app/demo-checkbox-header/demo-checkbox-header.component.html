@@ -1,0 +1,31 @@
+<section>
+  <legend>
+    <label>
+      <input type="checkbox" checkHeader="group1">全選</label>
+  </legend>
+  <label>
+    <input type="checkbox" group1>1</label>
+  <label>
+    <input type="checkbox" group1>2</label>
+  <label>
+    <input type="checkbox" group1>3</label>
+  <label>
+    <input type="checkbox" group1>4</label>
+</section>
+
+
+<section>
+  <legend>
+    <label>
+      <input type="checkbox" checkHeader="group2">全選</label>
+  </legend>
+  <label>
+    <input type="checkbox" value="1" group2 [checkedList]="arr">1</label>
+  <label>
+    <input type="checkbox" value="2" group2 [checkedList]="arr">2</label>
+  <label>
+    <input type="checkbox" value="3" group2 [checkedList]="arr">3</label>
+  <label>
+    <input type="checkbox" value="4" group2 [checkedList]="arr">4</label>
+</section>
+{{arr|json}}
