@@ -7,7 +7,7 @@ import {
   Self,
   Renderer2
 } from '@angular/core';
-import { Subject, from } from '../../../../../node_modules/rxjs';
+import { Subject, from } from 'rxjs';
 
 @Directive({
   selector: '[checkHeader]',
