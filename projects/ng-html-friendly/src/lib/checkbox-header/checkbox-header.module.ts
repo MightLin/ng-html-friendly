@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CheckboxHeaderDirective } from '.';
+import { CheckboxHeaderDirective } from './checkbox-header.directive';
+
 
 @NgModule({
   imports: [CommonModule],
