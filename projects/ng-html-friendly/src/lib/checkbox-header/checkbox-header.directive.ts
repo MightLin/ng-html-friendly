@@ -5,69 +5,81 @@ import {
   OnInit,
   ElementRef,
   Self,
-  Renderer2
+  Renderer2,
+  AfterContentChecked
 } from '@angular/core';
 import { Subject, from } from 'rxjs';
-import { DoCheck } from '@angular/core';
 
 @Directive({
+  // tslint:disable-next-line: directive-selector
   selector: '[checkHeader]',
   exportAs: 'checkHeader'
 })
-export class CheckboxHeaderDirective implements OnInit {
+export class CheckboxHeaderDirective implements OnInit, AfterContentChecked {
+  // tslint:disable-next-line: no-input-rename
   @Input('checkHeader') checkHeaderName: string;
 
+  // checkbox for all-check
   checkboxHeader: HTMLInputElement;
+
+  // checkbox list
   checkboxGroup: NodeListOf<HTMLInputElement>;
-  groupClick: Subject<HTMLInputElement> = new Subject<HTMLInputElement>();
-  mustRefresh: boolean = false;
+
+  private groupListen: any[] = [];
+  private groupClick: Subject<HTMLInputElement> = new Subject<HTMLInputElement>();
+  private mustRefresh = false;
 
   constructor(
     @Self() private elementRef: ElementRef,
     private _renderer: Renderer2
-  ) {}
+  ) { }
 
   ngOnInit() {
-    this.Refresh();
+    this.refresh();
     this.checkboxHeader = this.elementRef.nativeElement;
     this.registerCheckboxHeadEvent();
   }
 
-  Refresh() {
+  refresh() {
     this.mustRefresh = true;
   }
 
-  ngDoCheck() {}
 
   ngAfterContentChecked() {
     if (this.mustRefresh) {
-      console.log('refresh');
-      let body = this.elementRef.nativeElement.closest('body') as HTMLElement;
+      // console.log('refresh');
+      const body = this.elementRef.nativeElement.closest('body') as HTMLElement;
       this.checkboxGroup = body.querySelectorAll(
         'input[type=checkbox][' + this.checkHeaderName + ']'
       ) as NodeListOf<HTMLInputElement>;
 
-      // console.log(this.checkboxGroup.length);
-
       this.registerCheckboxGroupEvent();
+      // this.checkboxHeader.checked = null;
+      this.checkAll(false);
       this.mustRefresh = false;
     }
   }
-  ngAfterViewChecked() {}
 
   private registerCheckboxHeadEvent() {
     this._renderer.listen(this.checkboxHeader, 'change', event => {
-      if (this.checkboxHeader.checked) this.checkAll(true);
-      else this.checkAll(false);
+      if (this.checkboxHeader.checked) { this.checkAll(true); } else { this.checkAll(false); }
     });
   }
 
   private registerCheckboxGroupEvent() {
-    for (var i = 0; i < this.checkboxGroup.length; i++) {
-      var chk = this.checkboxGroup[i];
-      this._renderer.listen(chk, 'change', e => {
+    for (let i = 0; i < this.groupListen.length; i++) {
+      if (this.groupListen[i]) {
+        this.groupListen[i]();
+      }
+    }
+    this.groupListen = [];
+    for (let i = 0; i < this.checkboxGroup.length; i++) {
+      // tslint:disable-next-line: prefer-const
+      const chk = this.checkboxGroup[i];
+      const listen = this._renderer.listen(chk, 'change', e => {
         this.groupClick.next(chk);
       });
+      this.groupListen.push(listen);
     }
 
     this.groupClick
@@ -83,18 +95,18 @@ export class CheckboxHeaderDirective implements OnInit {
       this.checkboxHeader.checked = null;
     } else {
       from(this.checkboxGroup)
-        .pipe(every(ch => ch.checked == true))
+        .pipe(every(ch => ch.checked === true))
         .subscribe(all => {
-          if (all) this.checkboxHeader.checked = true;
-          else this.checkboxHeader.checked = false;
+          if (all) { this.checkboxHeader.checked = true; } else { this.checkboxHeader.checked = false; }
         });
     }
   }
 
   checkAll(checked: boolean) {
-    for (var i = 0; i < this.checkboxGroup.length; i++) {
-      if (this.checkboxGroup[i].checked !== checked)
+    for (let i = 0; i < this.checkboxGroup.length; i++) {
+      if (this.checkboxGroup[i].checked !== checked) {
         this.checkboxGroup[i].click();
+      }
     }
   }
 }

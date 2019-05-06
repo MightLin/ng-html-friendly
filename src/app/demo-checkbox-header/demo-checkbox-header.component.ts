@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CheckboxHeaderDirective } from 'dist/ng-html-friendly/public_api';
+import { CheckboxHeaderDirective } from 'projects/ng-html-friendly/src/public_api';
 
 @Component({
   selector: 'app-demo-checkbox-header',
@@ -17,7 +17,8 @@ export class DemoCheckboxHeaderComponent implements OnInit {
   sctArr: any[] = [];
   randomArr: number[] = [];
 
-  ngOnInit() {}
+  ngOnInit() { }
+
 
   buildArr(ch: CheckboxHeaderDirective) {
     var count = Math.floor(Math.random() * 100) + 10;
@@ -27,6 +28,6 @@ export class DemoCheckboxHeaderComponent implements OnInit {
       this.randomArr.push(Math.floor(Math.random() * 9999));
     }
     console.log(this.randomArr.length);
-    ch.Refresh();
+    ch.refresh();
   }
 }
