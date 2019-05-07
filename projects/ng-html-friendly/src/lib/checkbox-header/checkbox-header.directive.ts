@@ -1,4 +1,4 @@
-import { debounceTime, every, tap } from 'rxjs/internal/operators';
+import { debounceTime, every, mergeMap } from 'rxjs/internal/operators';
 import {
   Directive,
   Input,
@@ -8,16 +8,19 @@ import {
   Renderer2,
   AfterContentChecked,
   OnChanges,
-  SimpleChanges
+  SimpleChanges,
+  AfterContentInit,
+  OnDestroy
 } from '@angular/core';
-import { Subject, from, Subscription } from 'rxjs';
+import { from, Subscription, fromEvent } from 'rxjs';
 
 @Directive({
   // tslint:disable-next-line: directive-selector
   selector: '[checkHeader]',
   exportAs: 'checkHeader'
 })
-export class CheckboxHeaderDirective implements OnInit, AfterContentChecked, OnChanges {
+export class CheckboxHeaderDirective implements OnInit, AfterContentChecked, OnChanges, AfterContentInit, OnDestroy {
+
   // tslint:disable-next-line: no-input-rename
   @Input('checkHeader') checkHeaderName: string;
 
@@ -31,27 +34,28 @@ export class CheckboxHeaderDirective implements OnInit, AfterContentChecked, OnC
   // checkbox list
   checkboxGroup: NodeListOf<HTMLInputElement>;
 
-  private groupListen: any[] = [];
-  private groupClick: Subject<HTMLInputElement> = new Subject<HTMLInputElement>();
+  private headListen: Subscription;
+  private groupClick: Subscription;
   private mustRefresh = false;
 
   constructor(
     @Self() private elementRef: ElementRef,
-    private _renderer: Renderer2
+    // private _renderer: Renderer2
   ) {
-    this.groupClick
-      .asObservable()
-      .pipe(
-        debounceTime(100)
-      )
-      .subscribe(s => {
-        this.checkStatus(s);
-      });
   }
 
   ngOnInit() {
     this.checkboxHeader = this.elementRef.nativeElement;
     this.registerCheckboxHeadEvent();
+  }
+
+  ngOnDestroy(): void {
+    if (this.headListen) {
+      this.headListen.unsubscribe();
+    }
+    if (this.groupClick) {
+      this.groupClick.unsubscribe();
+    }
   }
 
   ngAfterContentInit(): void {
@@ -79,8 +83,7 @@ export class CheckboxHeaderDirective implements OnInit, AfterContentChecked, OnC
   }
 
   private registerCheckboxHeadEvent() {
-    // this.checkboxHeaderSub =
-    this._renderer.listen(this.checkboxHeader, 'change', event => {
+    this.headListen = fromEvent(this.checkboxHeader, 'change').subscribe(event => {
       if (this.checkboxHeader.checked) { this.checkAll(true); } else { this.checkAll(false); }
     });
   }
@@ -92,24 +95,18 @@ export class CheckboxHeaderDirective implements OnInit, AfterContentChecked, OnC
     this.checkboxGroup = body.querySelectorAll(
       'input[type=checkbox][' + this.checkHeaderName + ']'
     ) as NodeListOf<HTMLInputElement>;
-    // console.log(this.checkboxGroup);
   }
 
   private registerCheckboxGroupEvent() {
-    for (let i = 0; i < this.groupListen.length; i++) {
-      if (this.groupListen[i]) {
-        this.groupListen[i]();
-      }
-    }
-    this.groupListen = [];
-    for (let i = 0; i < this.checkboxGroup.length; i++) {
-      // tslint:disable-next-line: prefer-const
-      const chk = this.checkboxGroup[i];
-      const listen = this._renderer.listen(chk, 'change', e => {
-        this.groupClick.next(chk);
-      });
-      this.groupListen.push(listen);
-    }
+    if (this.groupClick) { this.groupClick.unsubscribe(); }
+    this.groupClick =
+      from(this.checkboxGroup)
+        .pipe(
+          mergeMap(h => fromEvent(h, 'change', e => e.target)),
+          debounceTime(100)
+        ).subscribe(s => {
+          this.checkStatus(s);
+        });
   }
 
 
