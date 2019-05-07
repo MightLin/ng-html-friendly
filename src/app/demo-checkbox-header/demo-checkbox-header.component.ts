@@ -16,11 +16,11 @@ export class DemoCheckboxHeaderComponent implements OnInit {
   arr: any[] = [];
   sctArr: any[] = [];
   randomArr: number[] = [];
-
+  randomArr2: number[] = [];
   ngOnInit() { }
 
 
-  buildArr(ch: CheckboxHeaderDirective) {
+  buildArr() {
     var count = Math.floor(Math.random() * 100) + 10;
 
     this.randomArr = [];
@@ -28,6 +28,16 @@ export class DemoCheckboxHeaderComponent implements OnInit {
       this.randomArr.push(Math.floor(Math.random() * 9999));
     }
     console.log(this.randomArr.length);
+  }
+
+  updateArr(ch: CheckboxHeaderDirective) {
+    let count = Math.floor(Math.random() * 100) + 10;
+
+    this.randomArr2.slice(0, 0);
+    for (let i = 0; i < count; i++) {
+      this.randomArr2.push(Math.floor(Math.random() * 9999));
+    }
+    console.log(this.randomArr2.length);
     ch.refresh();
   }
 }

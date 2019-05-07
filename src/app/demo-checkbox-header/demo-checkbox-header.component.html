@@ -7,7 +7,7 @@
   <label>
     <input type="checkbox" group1>1</label>
   <label>
-    <input type="checkbox" group1>2</label>
+    <input type="checkbox" disabled group1>2</label>
   <label>
     <input type="checkbox" group1>3</label>
   <label>
@@ -33,9 +33,21 @@
 <section>
   <legend>
     <label>
-      <input type="checkbox" #chhead="checkHeader" checkHeader="group3">全選</label>
-    <button (click)="buildArr(chhead);">產生陣列</button> {{randomArr.length}}
+      <input type="checkbox" #chhead="checkHeader" checkHeader="group3" [dectTarget]="randomArr">全選</label>
+    <button (click)="buildArr();">產生新陣列</button> {{randomArr.length}}
   </legend>
   <label *ngFor="let ch of randomArr">
     <input type="checkbox" [value]="ch" group3>{{ch}}</label>
+</section>
+
+<hr>
+
+<section>
+  <legend>
+    <label>
+      <input type="checkbox" #chhead="checkHeader" checkHeader="group4">全選</label>
+    <button (click)="updateArr(chhead);">更新原陣列</button> {{randomArr2.length}}
+  </legend>
+  <label *ngFor="let ch of randomArr2">
+    <input type="checkbox" [value]="ch" group4>{{ch}}</label>
 </section>
