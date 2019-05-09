@@ -8,13 +8,17 @@ import { DemoBinCheckboxComponent } from './demo-bin-checkbox/demo-bin-checkbox.
 import { DemoCheckedListComponent } from './demo-checked-list/demo-checked-list.component';
 import { DemoCheckboxHeaderComponent } from './demo-checkbox-header/demo-checkbox-header.component';
 import { BinCheckboxModule, CheckedListModule, CheckboxHeaderModule } from 'projects/ng-html-friendly/src/public_api';
+import { ParentComponent } from './demo-checkbox-header/parent/parent.component';
+import { ChildComponent } from './demo-checkbox-header/child/child.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DemoCheckedListComponent,
     DemoBinCheckboxComponent,
-    DemoCheckboxHeaderComponent
+    DemoCheckboxHeaderComponent,
+    ParentComponent,
+    ChildComponent
   ],
   imports: [
     BrowserModule,

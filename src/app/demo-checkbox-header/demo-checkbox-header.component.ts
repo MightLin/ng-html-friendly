@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CheckboxHeaderDirective } from 'projects/ng-html-friendly/src/public_api';
+import { interval } from 'rxjs';
+import { first } from 'rxjs/internal/operators';
 
 @Component({
   selector: 'app-demo-checkbox-header',
@@ -8,9 +10,14 @@ import { CheckboxHeaderDirective } from 'projects/ng-html-friendly/src/public_ap
 })
 export class DemoCheckboxHeaderComponent implements OnInit {
   constructor() {
-    for (var i = 0; i < 500; i++) {
-      this.arr.push(i);
-    }
+    interval(5000).pipe(first()).subscribe(() => {
+      let temp = [];
+      for (let i = 0; i < 500; i++) {
+        temp.push(i);
+      }
+      console.log('a');
+      this.arr = temp;
+    });
   }
 
   arr: any[] = [];

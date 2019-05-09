@@ -10,7 +10,9 @@ import {
   OnChanges,
   SimpleChanges,
   AfterContentInit,
-  OnDestroy
+  OnDestroy,
+  IterableDiffers,
+  IterableDiffer
 } from '@angular/core';
 import { from, Subscription, fromEvent } from 'rxjs';
 
@@ -37,11 +39,12 @@ export class CheckboxHeaderDirective implements OnInit, AfterContentChecked, OnC
   private headListen: Subscription;
   private groupClick: Subscription;
   private mustRefresh = false;
-
+  private differ: IterableDiffer<HTMLElement>;
   constructor(
     @Self() private elementRef: ElementRef,
-    // private _renderer: Renderer2
+    iterable: IterableDiffers
   ) {
+    this.differ = iterable.find([]).create(null);
   }
 
   ngOnInit() {
@@ -73,12 +76,16 @@ export class CheckboxHeaderDirective implements OnInit, AfterContentChecked, OnC
   }
 
   ngAfterContentChecked() {
+    // console.log('ngAfterContentChecked');
     if (this.mustRefresh) {
-      this.mustRefresh = false;
       this.getCheckboxGroup();
-      this.registerCheckboxGroupEvent();
-      this.checkboxHeader.checked = null;
-      this.checkAll(false);
+      if (this.checkboxGroup && this.differ.diff(Array.from(this.checkboxGroup))) {
+        // console.log('change');
+        this.mustRefresh = false;
+        this.registerCheckboxGroupEvent();
+        this.checkboxHeader.checked = null;
+        this.checkAll(false);
+      }
     }
   }
 

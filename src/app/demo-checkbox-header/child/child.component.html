@@ -1,0 +1,10 @@
+<ng-container *ngIf="head">
+  <input #hh="checkHeader" type="checkbox" checkHeader="parent">
+  <button (click)="hh.refresh()">refresh</button>
+  <ng-content></ng-content>
+</ng-container>
+
+<ng-container *ngIf="!head">
+  <input type="checkbox" parent>
+  <ng-content></ng-content>
+</ng-container>

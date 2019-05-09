@@ -16,17 +16,17 @@
 
 <hr>
 
-<section>
+<!-- <section>
   <legend>
     <label>
-      <input #ck2="checkHeader" type="checkbox" checkHeader="group2">全選</label>
+      <input #ck2="checkHeader" type="checkbox" checkHeader="group2" [dectTarget]="arr">全選</label>
     <button (click)="ck2.refresh()">重整</button>
   </legend>
   <label *ngFor="let ch of arr">
     <input type="checkbox" [value]="ch" group2 [checkedList]="sctArr">{{ch}}</label>
 
 </section>
-{{sctArr|json}}
+{{sctArr|json}} -->
 
 <hr>
 
@@ -50,4 +50,17 @@
   </legend>
   <label *ngFor="let ch of randomArr2">
     <input type="checkbox" [value]="ch" group4>{{ch}}</label>
+</section>
+
+<hr>
+
+<section>
+  <legend>
+
+  </legend>
+  <app-parent>
+    <app-child *ngFor="let c of arr">
+      {{c}}
+    </app-child>
+  </app-parent>
 </section>
