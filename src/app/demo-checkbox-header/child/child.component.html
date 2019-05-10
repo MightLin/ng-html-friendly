@@ -5,6 +5,10 @@
 </ng-container>
 
 <ng-container *ngIf="!head">
-  <input type="checkbox" parent>
+  <ng-container *ngFor="let a of [1,2,3]">
+    <ng-container *ngIf="a==1">
+        <input type="checkbox" parent>
+    </ng-container>
+  </ng-container>
   <ng-content></ng-content>
 </ng-container>

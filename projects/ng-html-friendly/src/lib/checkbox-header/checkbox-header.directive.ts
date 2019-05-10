@@ -12,7 +12,8 @@ import {
   AfterContentInit,
   OnDestroy,
   IterableDiffers,
-  IterableDiffer
+  IterableDiffer,
+  DoCheck
 } from '@angular/core';
 import { from, Subscription, fromEvent } from 'rxjs';
 
@@ -21,7 +22,7 @@ import { from, Subscription, fromEvent } from 'rxjs';
   selector: '[checkHeader]',
   exportAs: 'checkHeader'
 })
-export class CheckboxHeaderDirective implements OnInit, AfterContentChecked, OnChanges, AfterContentInit, OnDestroy {
+export class CheckboxHeaderDirective implements OnInit, AfterContentChecked, OnChanges, OnDestroy, DoCheck {
 
   // tslint:disable-next-line: no-input-rename
   @Input('checkHeader') checkHeaderName: string;
@@ -61,36 +62,48 @@ export class CheckboxHeaderDirective implements OnInit, AfterContentChecked, OnC
     }
   }
 
-  ngAfterContentInit(): void {
-    this.refresh();
-  }
-
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.dectTarget !== undefined) {
-      this.refresh();
+      this.mustRefresh = true;
     }
   }
 
   refresh() {
+    // console.log('refresh');
     this.mustRefresh = true;
   }
 
   ngAfterContentChecked() {
     // console.log('ngAfterContentChecked');
     if (this.mustRefresh) {
-      this.getCheckboxGroup();
-      if (this.checkboxGroup && this.differ.diff(Array.from(this.checkboxGroup))) {
-        // console.log('change');
-        this.mustRefresh = false;
-        this.registerCheckboxGroupEvent();
-        this.checkboxHeader.checked = null;
-        this.checkAll(false);
-      }
+      // console.log('ngAfterContentChecked');
+      this.checkCheckboxGroup();
+      this.mustRefresh = false;
     }
+  }
+
+  private checkCheckboxGroup(): void {
+    const newCheckbox = this.getCheckboxGroup();
+    const changes = this.differ.diff(Array.from(newCheckbox));
+    // console.log('checkCheckboxGroup:' + newCheckbox.length);
+    if (changes) {
+      // console.log('change old:' + ((this.checkboxGroup) ? this.checkboxGroup.length : 'null'));
+      this.checkboxGroup = newCheckbox;
+      this.registerCheckboxGroupEvent();
+      this.checkboxHeader.checked = null;
+      this.checkAll(false);
+      this.mustRefresh = false;
+    }
+  }
+
+  ngDoCheck(): void {
+    // console.log('ngDoCheck');
+    this.checkCheckboxGroup();
   }
 
   private registerCheckboxHeadEvent() {
     this.headListen = fromEvent(this.checkboxHeader, 'change').subscribe(event => {
+      // console.log(this.checkboxHeader.checked);
       if (this.checkboxHeader.checked) { this.checkAll(true); } else { this.checkAll(false); }
     });
   }
@@ -99,7 +112,7 @@ export class CheckboxHeaderDirective implements OnInit, AfterContentChecked, OnC
   /** 取得連結的checkbox */
   private getCheckboxGroup() {
     const body = this.elementRef.nativeElement.closest('body') as HTMLElement;
-    this.checkboxGroup = body.querySelectorAll(
+    return body.querySelectorAll(
       'input[type=checkbox][' + this.checkHeaderName + ']'
     ) as NodeListOf<HTMLInputElement>;
   }
@@ -133,6 +146,8 @@ export class CheckboxHeaderDirective implements OnInit, AfterContentChecked, OnC
 
   /** 全選或取消全選 */
   checkAll(checked: boolean) {
+    if (!this.checkboxGroup) { return; }
+    // console.log('checkAll:' + checked);
     for (let i = 0; i < this.checkboxGroup.length; i++) {
       if (this.checkboxGroup[i].checked !== checked) {
         this.checkboxGroup[i].click();

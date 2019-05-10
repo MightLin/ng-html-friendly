@@ -28,8 +28,7 @@ export class DemoCheckboxHeaderComponent implements OnInit {
 
 
   buildArr() {
-    var count = Math.floor(Math.random() * 100) + 10;
-
+    var count = 5;
     this.randomArr = [];
     for (var i = 0; i < count; i++) {
       this.randomArr.push(Math.floor(Math.random() * 9999));
@@ -38,13 +37,13 @@ export class DemoCheckboxHeaderComponent implements OnInit {
   }
 
   updateArr(ch: CheckboxHeaderDirective) {
-    let count = Math.floor(Math.random() * 100) + 10;
+    let count = Math.floor(Math.random() * 15) + 10;
 
     this.randomArr2.slice(0, 0);
     for (let i = 0; i < count; i++) {
       this.randomArr2.push(Math.floor(Math.random() * 9999));
     }
-    console.log(this.randomArr2.length);
+    // console.log(this.randomArr2.length);
     ch.refresh();
   }
 }
