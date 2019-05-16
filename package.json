@@ -7,7 +7,7 @@
     "build": "ng build ng-html-friendly",
     "prod": "ng build ng-html-friendly --prod",
     "publish": "npm publish dist/ng-html-friendly",
-    "test": "ng test",
+    "test": "ng test ng-html-friendly",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
