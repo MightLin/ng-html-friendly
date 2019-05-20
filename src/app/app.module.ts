@@ -10,6 +10,9 @@ import { DemoCheckboxHeaderComponent } from './demo-checkbox-header/demo-checkbo
 import { BinCheckboxModule, CheckedListModule, CheckboxHeaderModule } from 'projects/ng-html-friendly/src/public_api';
 import { ParentComponent } from './demo-checkbox-header/parent/parent.component';
 import { ChildComponent } from './demo-checkbox-header/child/child.component';
+import { DemoCheckboxLeaderComponent } from './demo-checkbox-leader/demo-checkbox-leader.component';
+import { CheckboxLeaderModule } from 'projects/ng-html-friendly/src/lib/checkbox-leader';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -18,13 +21,16 @@ import { ChildComponent } from './demo-checkbox-header/child/child.component';
     DemoBinCheckboxComponent,
     DemoCheckboxHeaderComponent,
     ParentComponent,
-    ChildComponent
+    ChildComponent,
+    DemoCheckboxLeaderComponent,
   ],
   imports: [
     BrowserModule,
     BinCheckboxModule,
     CheckedListModule,
     CheckboxHeaderModule,
+    CheckboxLeaderModule,
+    FormsModule,
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: false, useHash: true }

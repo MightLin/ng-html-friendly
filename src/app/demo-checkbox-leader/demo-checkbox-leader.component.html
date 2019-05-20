@@ -1,0 +1,46 @@
+<section>
+  <legend>
+    Basic Checkbox
+  </legend>
+  <div>
+    checkbox count <input type="text" [(ngModel)]="demo1.basicCount">
+    checkbox count <input type="text" [(ngModel)]="demo1.defaultChecked">
+  </div>
+  <label>
+    <input type="checkbox" checkbox-leader #leader1="checkbox-leader">全選</label>
+  <label *ngFor="let e of range(demo1.basicCount)">
+    <input type="checkbox" [checkbox-leader-item]="leader1" [checked]="demo1.defaultChecked">{{e}}</label>
+
+</section>
+
+<hr>
+
+
+<section>
+  <legend>
+    Add Checkbox
+  </legend>
+  <div>
+    <button (click)="addDemo2()">Add one item</button>
+  </div>
+  <label>
+    <input type="checkbox" checkbox-leader #leader2="checkbox-leader">全選</label>
+  <label *ngFor="let ch of demo2">
+    <input type="checkbox" [checkbox-leader-item]="leader2" [value]="ch">{{ch}}</label>
+
+</section>
+
+<hr>
+
+<section>
+  <legend>
+    With CheckedList
+  </legend>
+  <label>
+    <input type="checkbox" checkbox-leader #leader3="checkbox-leader">全選</label>
+  <label *ngFor="let ch of demo3">
+    <input type="checkbox" [checkbox-leader-item]="leader3" [value]="ch" [checkedList]="demo3List">{{ch}}</label>
+  <div>
+    {{demo3List|json}}
+  </div>
+</section>
