@@ -10,6 +10,7 @@ import { DemoCheckboxHeaderComponent } from './demo-checkbox-header/demo-checkbo
 import { BinCheckboxModule, CheckedListModule, CheckboxHeaderModule } from 'projects/ng-html-friendly/src/public_api';
 import { ParentComponent } from './demo-checkbox-header/parent/parent.component';
 import { ChildComponent } from './demo-checkbox-header/child/child.component';
+import { DemoBreadcrumbComponent } from './demo-breadcrumb/demo-breadcrumb.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { ChildComponent } from './demo-checkbox-header/child/child.component';
     DemoBinCheckboxComponent,
     DemoCheckboxHeaderComponent,
     ParentComponent,
-    ChildComponent
+    ChildComponent,
+    DemoBreadcrumbComponent
   ],
   imports: [
     BrowserModule,
