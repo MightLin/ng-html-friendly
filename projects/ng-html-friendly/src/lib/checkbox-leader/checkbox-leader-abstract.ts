@@ -1,5 +1,5 @@
-import { Self, ElementRef } from "@angular/core";
-import { fromEvent, Observable } from "rxjs";
+import { Self, ElementRef } from '@angular/core';
+import { fromEvent, Observable } from 'rxjs';
 
 export class CheckboxLeaderAbstract {
 

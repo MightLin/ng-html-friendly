@@ -1,4 +1,4 @@
-import { Directive, Input, OnInit, OnDestroy, Self, ElementRef, AfterViewInit } from '@angular/core';
+import { Directive, Input, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { CheckboxLeaderDirective } from './checkbox-leader.directive';
 import { Subscription } from 'rxjs';
 import { CheckboxLeaderAbstract } from './checkbox-leader-abstract';
@@ -22,34 +22,31 @@ export class CheckboxLeaderItemDirective extends CheckboxLeaderAbstract implemen
     this.leaderListen = this.leader.command.asObservable().subscribe(ob => {
       this.changeChecked(ob);
     });
-    // 加入 leader 控管列表
+
     this.eventListen = this.eventObservable.subscribe(event => {
+      // 更新目前值
       this.leader.checkin(this, this.checkboxHost.checked);
     });
   }
   ngAfterViewInit(): void {
-    // 並發送一次初始值
-    console.log(this.checkboxHost.checked);
+    // 加入 leader 控管列表
+    // console.log(this.checkboxHost.checked);
     this.leader.checkin(this, this.checkboxHost.checked);
   }
 
   ngOnDestroy(): void {
     // 取消觀察 leader
     if (this.leaderListen) { this.leaderListen.unsubscribe(); }
+    if (this.eventListen) { this.eventListen.unsubscribe(); }
     // 退出 leader 控管列表
     this.leader.checkout(this);
   }
 
   private changeChecked(checked: boolean) {
-    // console.log(checked);
-    // if (status) {
-    //   this.checkboxHost.checked = true;
-    // } else {
-    //   this.checkboxHost.checked = null;
-    // }
     if (this.checkboxHost.checked !== checked) {
       this.checkboxHost.click();
     }
+
   }
 
 }

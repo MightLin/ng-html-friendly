@@ -1,6 +1,6 @@
 import { Directive, Output, EventEmitter, OnDestroy, OnInit, Self, ElementRef } from '@angular/core';
-import { Subscription, fromEvent, from } from 'rxjs';
-import { every, tap, debounceTime } from 'rxjs/internal/operators';
+import { Subscription, from } from 'rxjs';
+import { every } from 'rxjs/internal/operators';
 import { CheckboxLeaderAbstract } from './checkbox-leader-abstract';
 
 @Directive({
@@ -17,7 +17,6 @@ export class CheckboxLeaderDirective extends CheckboxLeaderAbstract implements O
   checkChildChecked() {
     from(this.childChecked)
       .pipe(
-        tap(ch => console.log(ch[1])),
         every(ch => ch[1]),
       )
       .subscribe(all => {
@@ -27,7 +26,7 @@ export class CheckboxLeaderDirective extends CheckboxLeaderAbstract implements O
 
   /** child checkbox 加入控管或更改值時 */
   checkin(key: any, checked: boolean) {
-    console.log(checked);
+    // console.log(checked);
     this.childChecked.set(key, checked);
     this.checkChildChecked();
   }
@@ -49,7 +48,6 @@ export class CheckboxLeaderDirective extends CheckboxLeaderAbstract implements O
   }
 
   ngOnDestroy(): void {
-    // 取消註冊DOM改變
     if (this.eventListen) { this.eventListen.unsubscribe(); }
   }
 }
