@@ -1,2 +1,1 @@
-export { CheckboxHeaderModule } from './checkbox-header.module';
-export { CheckboxHeaderDirective } from './checkbox-header.directive';
+export * from './public_api';
