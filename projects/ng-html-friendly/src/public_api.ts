@@ -16,3 +16,7 @@ export * from './lib/checkbox-header/checkbox-header.module';
 
 export * from './lib/breadcrumb/breadcrumb.module';
 export * from './lib/breadcrumb/breadcrumb.service';
+
+
+
+export * from './lib/checkbox-leader/index';
