@@ -9,41 +9,35 @@ import { first } from 'rxjs/internal/operators';
   styleUrls: ['./demo-checkbox-header.component.css']
 })
 export class DemoCheckboxHeaderComponent implements OnInit {
-  constructor() {
-    interval(5000).pipe(first()).subscribe(() => {
-      let temp = [];
-      for (let i = 0; i < 500; i++) {
-        temp.push(i);
-      }
-      console.log('a');
-      this.arr = temp;
-    });
+  demo1 = {
+    basicCount: 5,
+    basicArr: [],
+  };
+
+  demo2 = [8, 9, 10]
+
+
+  demo3 = [1, 2, 3];
+
+  demo3List = [2];
+
+  demo4: any;
+
+  constructor() { }
+
+  newArr1() {
+    this.demo1.basicArr = this.range(this.demo1.basicCount);
   }
 
-  arr: any[] = [];
-  sctArr: any[] = [];
-  randomArr: number[] = [];
-  randomArr2: number[] = [];
-  ngOnInit() { }
-
-
-  buildArr() {
-    var count = 5;
-    this.randomArr = [];
-    for (var i = 0; i < count; i++) {
-      this.randomArr.push(Math.floor(Math.random() * 9999));
-    }
-    console.log(this.randomArr.length);
+  ngOnInit() {
   }
 
-  updateArr(ch: CheckboxHeaderDirective) {
-    let count = Math.floor(Math.random() * 15) + 10;
+  addDemo2() {
+    this.demo2.push(Math.floor(Math.random() * 9999));
+  }
 
-    this.randomArr2.slice(0, 0);
-    for (let i = 0; i < count; i++) {
-      this.randomArr2.push(Math.floor(Math.random() * 9999));
-    }
-    // console.log(this.randomArr2.length);
-    ch.refresh();
+
+  range(length) {
+    return Array.apply(null, { length: length }).map((v, i) => i);
   }
 }

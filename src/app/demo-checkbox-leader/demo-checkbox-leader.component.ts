@@ -10,7 +10,6 @@ export class DemoCheckboxLeaderComponent implements OnInit {
   demo1 = {
     basicCount: 5,
     basicArr: [],
-    defaultChecked: false,
   };
 
   demo2 = [8, 9, 10]
@@ -22,7 +21,11 @@ export class DemoCheckboxLeaderComponent implements OnInit {
 
   demo4: any;
 
-  constructor(private cd: ChangeDetectorRef) { }
+  constructor() { }
+
+  newArr1() {
+    this.demo1.basicArr = this.range(this.demo1.basicCount);
+  }
 
   ngOnInit() {
   }

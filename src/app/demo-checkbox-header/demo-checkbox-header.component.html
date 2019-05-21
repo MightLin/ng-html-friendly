@@ -1,66 +1,62 @@
-<section>
+<section checkHeaderContainer>
   <legend>
-    <label>
-      <input #ck1="checkHeader" type="checkbox" checkHeader="group1">全選</label>
-    <button (click)="ck1.refresh()">重整</button>
+    Basic Checkbox
   </legend>
+  <div>
+    checkbox count <input type="text" [(ngModel)]="demo1.basicCount">
+    <button (click)="newArr1()">build new Arr</button>
+  </div>
   <label>
-    <input type="checkbox" group1>1</label>
-  <label>
-    <input type="checkbox" disabled group1>2</label>
-  <label>
-    <input type="checkbox" group1>3</label>
-  <label>
-    <input type="checkbox" group1>4</label>
+    <input type="checkbox" checkHeader="group1" [dectTarget]="demo1.basicArr">全選</label>
+  <label *ngFor="let e of demo1.basicArr">
+    <input type="checkbox" group1>{{e}}</label>
+
 </section>
 
 <hr>
 
-<section>
+
+<section checkHeaderContainer>
   <legend>
-    <label>
-      <input #ck2="checkHeader" type="checkbox" checkHeader="group2" [dectTarget]="arr">全選</label>
-    <button (click)="ck2.refresh()">重整</button>
+    Add Checkbox
   </legend>
-  <label *ngFor="let ch of arr">
-    <input type="checkbox" [value]="ch" group2 [checkedList]="sctArr">{{ch}}</label>
+  <div>
+    <button (click)="addDemo2()">Add one item</button>
+  </div>
+  <label>
+    <input type="checkbox" checkHeader="group2" [dectTarget]="demo2">全選</label>
+  <label *ngFor="let ch of demo2">
+    <input type="checkbox" group2 [value]="ch">{{ch}}</label>
 
 </section>
-{{sctArr|json}}
+
+
 
 <hr>
 
-<section>
+<section checkHeaderContainer>
   <legend>
-    <label>
-      <input type="checkbox" #chhead="checkHeader" checkHeader="group3" [dectTarget]="randomArr">全選</label>
-    <button (click)="buildArr();">產生新陣列</button> {{randomArr.length}}
+    With CheckedList
   </legend>
-  <label *ngFor="let ch of randomArr">
-    <input type="checkbox" [value]="ch" group3>{{ch}}</label>
+  <label>
+    <input type="checkbox" checkHeader="group3">全選</label>
+  <label *ngFor="let ch of demo3">
+    <input type="checkbox" group3 [value]="ch" [checkedList]="demo3List">{{ch}}</label>
+  <div>
+    {{demo3List|json}}
+  </div>
 </section>
+
 
 <hr>
 
-<section>
+<section checkHeaderContainer>
   <legend>
-    <label>
-      <input type="checkbox" #chhead="checkHeader" checkHeader="group4">全選</label>
-    <button (click)="updateArr(chhead);">更新原陣列</button> {{randomArr2.length}}
+    Empty
   </legend>
-  <label *ngFor="let ch of randomArr2">
-    <input type="checkbox" [value]="ch" group4>{{ch}}</label>
+  <label>
+    <input type="checkbox" checkHeader="group4">全選</label>
+
 </section>
 
 <hr>
-
-<section>
-  <legend>
-
-  </legend>
-  <app-parent>
-    <app-child *ngFor="let c of arr">
-      {{c}}
-    </app-child>
-  </app-parent>
-</section>

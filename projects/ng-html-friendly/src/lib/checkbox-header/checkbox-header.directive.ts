@@ -5,30 +5,36 @@ import {
   OnInit,
   ElementRef,
   Self,
-  Renderer2,
   AfterContentChecked,
-  OnChanges,
-  SimpleChanges,
-  AfterContentInit,
   OnDestroy,
   IterableDiffers,
   IterableDiffer,
-  DoCheck
+  DoCheck,
+  Inject,
+  SkipSelf,
+  Optional
 } from '@angular/core';
 import { from, Subscription, fromEvent } from 'rxjs';
+import { CheckboxHeaderContainerDirective } from './checkbox-header-container.directive';
 
 @Directive({
   // tslint:disable-next-line: directive-selector
   selector: '[checkHeader]',
   exportAs: 'checkHeader'
 })
-export class CheckboxHeaderDirective implements OnInit, AfterContentChecked, OnChanges, OnDestroy, DoCheck {
+export class CheckboxHeaderDirective implements OnInit, AfterContentChecked, OnDestroy, DoCheck {
 
   // tslint:disable-next-line: no-input-rename
   @Input('checkHeader') checkHeaderName: string;
 
   // 偵側到此變數變更時將會更新
-  @Input() dectTarget: any;
+  _dectTarget: any;
+  @Input('dectTarget')
+  set dectTarget(value: any) {
+    this._dectTarget = value;
+    this.refresh();
+  }
+  get dectTarget() { return this._dectTarget; }
 
   // checkbox for all-check
   checkboxHeader: HTMLInputElement;
@@ -43,9 +49,11 @@ export class CheckboxHeaderDirective implements OnInit, AfterContentChecked, OnC
   private differ: IterableDiffer<HTMLElement>;
   constructor(
     @Self() private elementRef: ElementRef,
+    @Inject(CheckboxHeaderContainerDirective) @Optional() @SkipSelf() private headerContainer: CheckboxHeaderContainerDirective,
     iterable: IterableDiffers
   ) {
     this.differ = iterable.find([]).create(null);
+    // console.log(this.headerContainer);
   }
 
   ngOnInit() {
@@ -59,12 +67,6 @@ export class CheckboxHeaderDirective implements OnInit, AfterContentChecked, OnC
     }
     if (this.groupClick) {
       this.groupClick.unsubscribe();
-    }
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes.dectTarget !== undefined) {
-      this.mustRefresh = true;
     }
   }
 
@@ -98,11 +100,11 @@ export class CheckboxHeaderDirective implements OnInit, AfterContentChecked, OnC
 
   ngDoCheck(): void {
     // console.log('ngDoCheck');
-    this.checkCheckboxGroup();
+    this.refresh();
   }
 
   private registerCheckboxHeadEvent() {
-    this.headListen = fromEvent(this.checkboxHeader, 'change').subscribe(event => {
+    this.headListen = fromEvent(this.checkboxHeader, 'change').subscribe(() => {
       // console.log(this.checkboxHeader.checked);
       if (this.checkboxHeader.checked) { this.checkAll(true); } else { this.checkAll(false); }
     });
@@ -111,10 +113,17 @@ export class CheckboxHeaderDirective implements OnInit, AfterContentChecked, OnC
 
   /** 取得連結的checkbox */
   private getCheckboxGroup() {
-    const body = this.elementRef.nativeElement.closest('body') as HTMLElement;
-    return body.querySelectorAll(
-      'input[type=checkbox][' + this.checkHeaderName + ']'
-    ) as NodeListOf<HTMLInputElement>;
+    if (this.headerContainer) {
+      // console.log('container');
+      return this.headerContainer.nativeElement.querySelectorAll(
+        'input[type=checkbox][' + this.checkHeaderName + ']'
+      ) as NodeListOf<HTMLInputElement>;
+    } else {
+      const body = this.elementRef.nativeElement.closest('body') as HTMLElement;
+      return body.querySelectorAll(
+        'input[type=checkbox][' + this.checkHeaderName + ']'
+      ) as NodeListOf<HTMLInputElement>;
+    }
   }
 
   private registerCheckboxGroupEvent() {
