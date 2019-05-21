@@ -1,6 +1,6 @@
 {
   "name": "ng-html-friendly",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "peerDependencies": {
     "@angular/common": ">=4.2.4",
     "@angular/core": ">=4.2.4",
@@ -12,6 +12,8 @@
   },
   "keywords": [
     "angular4",
+    "angular6",
+    "angular7",
     "ngx",
     "html"
   ],

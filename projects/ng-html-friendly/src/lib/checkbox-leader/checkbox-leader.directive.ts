@@ -13,6 +13,11 @@ export class CheckboxLeaderDirective extends CheckboxLeaderAbstract implements O
   private eventListen: Subscription;
   private childChecked = new Map<any, boolean>();
 
+  constructor(
+    @Self() elementRef: ElementRef,
+  ) {
+    super(elementRef);
+  }
 
   checkChildChecked() {
     from(this.childChecked)

@@ -1,4 +1,4 @@
-import { Directive, Input, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
+import { Directive, Input, OnInit, OnDestroy, AfterViewInit, Self, ElementRef } from '@angular/core';
 import { CheckboxLeaderDirective } from './checkbox-leader.directive';
 import { Subscription } from 'rxjs';
 import { CheckboxLeaderAbstract } from './checkbox-leader-abstract';
@@ -14,6 +14,12 @@ export class CheckboxLeaderItemDirective extends CheckboxLeaderAbstract implemen
   //  leader checkbox
   @Input('checkbox-leader-item') leader: CheckboxLeaderDirective;
 
+
+  constructor(
+    @Self() elementRef: ElementRef,
+  ) {
+    super(elementRef);
+  }
 
   ngOnInit(): void {
     if (!this.leader) { throw new Error('leader not ref.'); }
