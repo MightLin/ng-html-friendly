@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-demo-checkbox-leader',
@@ -20,7 +20,9 @@ export class DemoCheckboxLeaderComponent implements OnInit {
 
   demo3List = [2];
 
-  constructor() { }
+  demo4: any;
+
+  constructor(private cd: ChangeDetectorRef) { }
 
   ngOnInit() {
   }
@@ -33,4 +35,5 @@ export class DemoCheckboxLeaderComponent implements OnInit {
   range(length) {
     return Array.apply(null, { length: length }).map((v, i) => i);
   }
+
 }

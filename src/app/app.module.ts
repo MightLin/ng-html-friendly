@@ -14,6 +14,7 @@ import { DemoCheckboxLeaderComponent } from './demo-checkbox-leader/demo-checkbo
 import { CheckboxLeaderModule } from 'projects/ng-html-friendly/src/lib/checkbox-leader';
 import { FormsModule } from '@angular/forms';
 import { DemoBreadcrumbComponent } from './demo-breadcrumb/demo-breadcrumb.component';
+import { DemoChildComponent } from './demo-checkbox-leader/demo-child/demo-child.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { DemoBreadcrumbComponent } from './demo-breadcrumb/demo-breadcrumb.compo
     ParentComponent,
     ChildComponent,
     DemoCheckboxLeaderComponent,
-    DemoBreadcrumbComponent
+    DemoBreadcrumbComponent,
+    DemoChildComponent
   ],
   imports: [
     BrowserModule,
