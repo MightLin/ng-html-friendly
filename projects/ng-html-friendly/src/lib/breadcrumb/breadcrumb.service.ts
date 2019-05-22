@@ -12,7 +12,7 @@ export class BreadcrumbService {
   constructor() { }
 
   getBreadcrumb(routerEvents: Observable<Event>): Observable<Breadcrumb> {
-    return this.getBreadcrumbByEvent(routerEvents);
+    return this.getBreadcrumbByActivatedRouteSnapshot(routerEvents);
   }
 
 

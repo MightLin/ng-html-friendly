@@ -1,14 +1,3 @@
-// import { NgModule } from "@angular/core";
-// import { CommonModule } from "@angular/common";
-// import { CheckedListDirective } from "./checked-list.directive";
-
-// @NgModule({
-//   imports: [CommonModule],
-//   declarations: [CheckedListDirective],
-//   exports: [CheckedListDirective]
-// })
-// export class CheckedListModule {}
-
 import { NgModule } from "@angular/core";
 import { CheckedListDirective } from "./checked-list.directive";
 
@@ -17,4 +6,4 @@ import { CheckedListDirective } from "./checked-list.directive";
   declarations: [CheckedListDirective],
   exports: [CheckedListDirective]
 })
-export class CheckedListModule {}
+export class CheckedListModule { }

@@ -10,7 +10,7 @@ import {
 import { isArray } from 'util';
 
 @Directive({
-  selector: 'selector: "input[checkedList][type=checkbox]"'
+  selector: 'input[checkedList][type=checkbox]'
 })
 export class CheckedListDirective implements OnInit, DoCheck {
   ngDoCheck(): void {
