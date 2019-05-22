@@ -7,7 +7,7 @@
 export class MyApp {}
 ```
 
-Simple Variable
+## Simple Variable
 
 ```html
 
@@ -17,7 +17,7 @@ Simple Variable
 
 ```
 
-Complex Variable
+## Complex Variable
 
 ```html
 
@@ -27,7 +27,7 @@ Complex Variable
 </label>
 ```
 
-FormControl
+## FormControl
 
 ```html
 
