@@ -12,7 +12,7 @@ export class BreadcrumbService {
   constructor() { }
 
   getBreadcrumb(routerEvents: Observable<Event>): Observable<Breadcrumb> {
-    return this.getBreadcrumbByActivatedRouteSnapshot(routerEvents);
+    return this.getBreadcrumbByEvent(routerEvents);
   }
 
 
@@ -29,6 +29,11 @@ export class BreadcrumbService {
       }, null, () => {
         arr = arr.reverse();
         arr.reduce((parent, snap) => {
+          if (snap.url.length == 0) {
+            // console.log(snap);
+            return parent;
+          }
+
           let ans;
           if (parent) {
             ans = {
@@ -57,6 +62,7 @@ export class BreadcrumbService {
   private getBreadcrumbByActivatedRouteSnapshot(events: Observable<Event>): Observable<Breadcrumb> {
     return Observable.create((ob) => {
       events.pipe(
+        // tap((e) => console.log(e)),
         takeWhile((e) => !(e instanceof NavigationEnd)),
         filter(event => event instanceof ActivationEnd),
         map((e) => (e as ActivationEnd).snapshot),

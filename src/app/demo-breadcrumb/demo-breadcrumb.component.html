@@ -3,3 +3,9 @@
 <br />
 
 <a [routerLink]="['/','Father','Child','Breadcrumb',5]">Breadcrumb/:id</a>
+
+
+
+<div *ngFor="let br of (breadcrumb  )">
+  {{ br |json }}
+</div>

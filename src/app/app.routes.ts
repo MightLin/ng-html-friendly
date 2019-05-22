@@ -20,5 +20,6 @@ export const appRoutes: Routes = [
   {
     path: 'Father',
     loadChildren: './demo-breadcrumb/demo-breadcrumb.module#DemoBreadcrumbModule',
+    data: { breadcrumb: '父親' },
   }
 ];
