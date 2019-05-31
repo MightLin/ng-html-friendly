@@ -2,8 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { DemoCheckboxHeaderComponent } from './demo-checkbox-header.component';
-import { ParentComponent } from './parent/parent.component';
-import { ChildComponent } from './child/child.component';
 import { FormsModule } from '@angular/forms';
 import { CheckboxHeaderModule, CheckedListModule } from 'projects/ng-html-friendly/src';
 
@@ -20,7 +18,6 @@ import { CheckboxHeaderModule, CheckedListModule } from 'projects/ng-html-friend
       }
     ])
   ],
-  declarations: [DemoCheckboxHeaderComponent, ParentComponent,
-    ChildComponent]
+  declarations: [DemoCheckboxHeaderComponent]
 })
 export class DemoCheckboxHeaderModule { }
