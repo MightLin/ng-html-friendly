@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { BreadcrumbService } from './breadcrumb.service';
+import { BreadcrumbService } from '../src/lib/breadcrumb/breadcrumb.service';
 
 describe('BreadcrumbService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
