@@ -1,10 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DemoBinCheckboxComponent } from './demo-bin-checkbox.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BinCheckboxModule, BinCheckboxDirective } from 'projects/ng-html-friendly/src';
-import { BrowserModule } from '@angular/platform-browser';
-import { checkBinding } from '@angular/core/src/view/util';
+import { FormsModule } from '@angular/forms';
+import { BinCheckboxDirective } from 'projects/ng-html-friendly/src';
 
 describe('DemoBinCheckboxComponent', () => {
   let component: DemoBinCheckboxComponent;
