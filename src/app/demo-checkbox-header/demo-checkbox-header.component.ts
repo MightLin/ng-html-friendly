@@ -9,12 +9,7 @@ import { first } from 'rxjs/internal/operators';
   styleUrls: ['./demo-checkbox-header.component.css']
 })
 export class DemoCheckboxHeaderComponent implements OnInit {
-  demo1 = {
-    basicCount: 5,
-    basicArr: [],
-  };
 
-  demo2 = [8, 9, 10]
 
 
   demo3 = [1, 2, 3];
@@ -25,19 +20,12 @@ export class DemoCheckboxHeaderComponent implements OnInit {
 
   constructor() { }
 
-  newArr1() {
-    this.demo1.basicArr = this.range(this.demo1.basicCount);
-  }
+
 
   ngOnInit() {
   }
 
-  addDemo2() {
-    this.demo2.push(Math.floor(Math.random() * 9999));
-  }
 
 
-  range(length) {
-    return Array.apply(null, { length: length }).map((v, i) => i);
-  }
+
 }

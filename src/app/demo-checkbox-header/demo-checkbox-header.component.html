@@ -1,34 +1,11 @@
-<section checkHeaderContainer>
-  <legend>
-    Basic Checkbox
-  </legend>
-  <div>
-    checkbox count <input type="text" [(ngModel)]="demo1.basicCount">
-    <button (click)="newArr1()">build new Arr</button>
-  </div>
-  <label>
-    <input type="checkbox" checkHeader="group1" [dectTarget]="demo1.basicArr">全選</label>
-  <label *ngFor="let e of demo1.basicArr">
-    <input type="checkbox" group1>{{e}}</label>
-
-</section>
+<app-test-random-option></app-test-random-option>
 
 <hr>
 
 
-<section checkHeaderContainer>
-  <legend>
-    Add Checkbox
-  </legend>
-  <div>
-    <button (click)="addDemo2()">Add one item</button>
-  </div>
-  <label>
-    <input type="checkbox" checkHeader="group2" [dectTarget]="demo2">全選</label>
-  <label *ngFor="let ch of demo2">
-    <input type="checkbox" group2 [value]="ch">{{ch}}</label>
 
-</section>
+
+<app-test-dynamic-option></app-test-dynamic-option>
 
 
 
