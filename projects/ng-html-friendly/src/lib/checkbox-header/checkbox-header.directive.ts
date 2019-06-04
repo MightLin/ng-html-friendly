@@ -1,4 +1,4 @@
-import { debounceTime, every, mergeMap } from 'rxjs/internal/operators';
+
 import {
   Directive,
   Input,
@@ -16,6 +16,7 @@ import {
 } from '@angular/core';
 import { from, Subscription, fromEvent } from 'rxjs';
 import { CheckboxHeaderContainerDirective } from './checkbox-header-container.directive';
+import { mergeMap, map, every, debounceTime } from 'rxjs/operators';
 
 @Directive({
   // tslint:disable-next-line: directive-selector
@@ -128,16 +129,20 @@ export class CheckboxHeaderDirective implements OnInit, AfterContentChecked, OnD
 
   private registerCheckboxGroupEvent() {
     if (this.groupClick) { this.groupClick.unsubscribe(); }
+
+    // using rxjs/operators, not  rxjs/operators
     this.groupClick =
       from(this.checkboxGroup)
         .pipe(
-          mergeMap(h => fromEvent(h, 'change', e => e.target)),
+          // switchMap(h => of(h)),
+          mergeMap(h => fromEvent(h, 'change')),
+          map(e => e.target as HTMLInputElement),
           debounceTime(100)
-        ).subscribe(s => {
+        )
+        .subscribe(s => {
           this.checkStatus(s);
         });
   }
-
 
   /** 檢查 checkbox Header 是否需要勾選 */
   private checkStatus(chk: HTMLInputElement) {

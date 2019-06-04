@@ -26,7 +26,6 @@ export class MyApp {}
 </label>
 ```
 
-
 ```html
 <label>
     <input type="checkbox" [value]="{name:'Bruce'}" [checkedList]="objArr" />1</label>
@@ -40,3 +39,16 @@ export class MyApp {}
     <input type="checkbox" [value]="{name:'Loki'}" [checkedList]="objArr" />5</label>
 ```
 
+
+```ts
+
+export class DemoCheckedListComponent implements OnInit {
+  constructor() { }
+
+  ngOnInit() { }
+  variableArr: string[] = ["3"];
+  numArr: number[] = [];
+  objArr: any[] = [];
+}
+
+```

@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, NavigationEnd, ActivationEnd, ActivatedRouteSnapshot, Event } from '@angular/router';
-// import { filter, map, takeWhile, tap, first } from 'rxjs/internal/operators';
+// import { filter, map, takeWhile, tap, first } from 'rxjs/operators';
 // import { Observable, of, from, Subject } from 'rxjs';
 import { BreadcrumbService } from 'projects/ng-html-friendly/src';
 import { Observable } from 'rxjs';
 import { Breadcrumb } from 'projects/ng-html-friendly/src/lib/breadcrumb';
-import { toArray, map } from 'rxjs/internal/operators';
+import { toArray, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-demo-breadcrumb',

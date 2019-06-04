@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { NavigationEnd, ActivationEnd, ActivatedRouteSnapshot, Event } from '@angular/router';
-import { takeWhile, filter, tap, map, first } from 'rxjs/internal/operators';
+import { takeWhile, filter, tap, map, first } from 'rxjs/operators';
 import { Breadcrumb } from './breadcrumb';
 
 @Injectable({

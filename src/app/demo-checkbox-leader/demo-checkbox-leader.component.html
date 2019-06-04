@@ -63,6 +63,18 @@
 
 <section>
   <legend>
+    Disabled
+  </legend>
+  <label>
+    <input type="checkbox" checkbox-leader #leaderDisabled="checkbox-leader">全選</label>
+  <label *ngFor="let ch of [1,2,3,4,5]">
+    <input type="checkbox" [disabled]="ch==3" [checkbox-leader-item]="leaderDisabled" [value]="ch">{{ch}}</label>
+</section>
+
+<hr>
+
+<section>
+  <legend>
     Child Component
   </legend>
   <app-demo-child [head]='true' #headComponent></app-demo-child>
