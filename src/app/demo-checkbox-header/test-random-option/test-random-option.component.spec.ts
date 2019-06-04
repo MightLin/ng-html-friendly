@@ -1,20 +1,20 @@
 // import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-// import { DemoCheckboxLeaderComponent } from './demo-checkbox-leader.component';
+// import { TestRandomOptionComponent } from './test-random-option.component';
 
-// describe('DemoCheckboxLeaderComponent', () => {
-//   let component: DemoCheckboxLeaderComponent;
-//   let fixture: ComponentFixture<DemoCheckboxLeaderComponent>;
+// describe('TestRandomOptionComponent', () => {
+//   let component: TestRandomOptionComponent;
+//   let fixture: ComponentFixture<TestRandomOptionComponent>;
 
 //   beforeEach(async(() => {
 //     TestBed.configureTestingModule({
-//       declarations: [ DemoCheckboxLeaderComponent ]
+//       declarations: [ TestRandomOptionComponent ]
 //     })
 //     .compileComponents();
 //   }));
 
 //   beforeEach(() => {
-//     fixture = TestBed.createComponent(DemoCheckboxLeaderComponent);
+//     fixture = TestBed.createComponent(TestRandomOptionComponent);
 //     component = fixture.componentInstance;
 //     fixture.detectChanges();
 //   });
