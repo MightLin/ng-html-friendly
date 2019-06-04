@@ -1,6 +1,6 @@
 import { Directive, Output, EventEmitter, OnDestroy, OnInit, Self, ElementRef } from '@angular/core';
 import { Subscription, from } from 'rxjs';
-import { every } from 'rxjs/internal/operators';
+import { every } from 'rxjs/operators';
 import { CheckboxLeaderAbstract } from './checkbox-leader-abstract';
 
 @Directive({

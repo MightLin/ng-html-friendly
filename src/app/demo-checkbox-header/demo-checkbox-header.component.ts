@@ -1,7 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { CheckboxHeaderDirective } from 'projects/ng-html-friendly/src/public_api';
-import { interval } from 'rxjs';
-import { first } from 'rxjs/internal/operators';
 
 @Component({
   selector: 'app-demo-checkbox-header',
