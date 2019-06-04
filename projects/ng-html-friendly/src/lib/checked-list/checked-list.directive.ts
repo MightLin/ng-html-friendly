@@ -14,7 +14,12 @@ import { isArray } from 'util';
 })
 export class CheckedListDirective implements OnInit, DoCheck {
   ngDoCheck(): void {
-    if (!this._isArr) {
+    // this.checkContain();
+  }
+
+  checkContain() {
+
+    if (!this.isArray()) {
       let set = this.checkedList as Set<any>;
       if (set.has(this.value)) {
         if (!this._inputCheck.nativeElement.checked) {
@@ -31,7 +36,7 @@ export class CheckedListDirective implements OnInit, DoCheck {
       let arr = this.checkedList as any[];
       let index = arr.indexOf(this.value);
       // console.log("index" + index);
-      // console.log("checked:" + this._inputCheck.nativeElement.checked);
+      // console.log("value:" + this.value);
       if (index == -1 && this._inputCheck.nativeElement.checked) {
         this._inputCheck.nativeElement.checked = null;
       } else if (index > -1 && !this._inputCheck.nativeElement.checked) {
@@ -44,15 +49,22 @@ export class CheckedListDirective implements OnInit, DoCheck {
     //console.dir(_inputCheck);
   }
 
-  _isArr: boolean = false;
+  _checkedList: Set<any> | any[];
+  @Input()
+  set checkedList(value) {
+    this._checkedList = value;
+    this.checkContain();
+  }
+  get checkedList(): Set<any> | any[] {
+    return this._checkedList;
+  }
 
-  @Input() checkedList: Set<any> | any[];
 
   @Input() value: any;
 
   @HostListener('change', ['$event.target.checked', '$event'])
   onChange(checked: boolean, event) {
-    if (!this._isArr) {
+    if (!this.isArray()) {
       let set = this.checkedList as Set<any>;
       if (set.has(this.value)) {
         if (!checked) set.delete(this.value);
@@ -72,7 +84,12 @@ export class CheckedListDirective implements OnInit, DoCheck {
     }
   }
 
+  private isArray() {
+    return isArray(this.checkedList);
+  }
+
   ngOnInit(): void {
-    this._isArr = isArray(this.checkedList);
+    // console.log('ngOnInit');
+    this.checkContain();
   }
 }

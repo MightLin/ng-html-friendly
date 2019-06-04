@@ -31,7 +31,7 @@ export class CheckboxLeaderDirective extends CheckboxLeaderAbstract implements O
 
   /** child checkbox 加入控管或更改值時 */
   checkin(key: any, ch: () => boolean) {
-    console.log(ch);
+    // console.log(ch);
     this.childChecked.set(key, ch);
     this.checkChildChecked();
   }
