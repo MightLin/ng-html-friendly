@@ -11,7 +11,7 @@ export class CheckboxLeaderDirective extends CheckboxLeaderAbstract implements O
 
 
   private eventListen: Subscription;
-  private childChecked = new Map<any, boolean>();
+  private childChecked = new Map<any, () => boolean>();
 
   constructor(
     @Self() elementRef: ElementRef,
@@ -22,7 +22,7 @@ export class CheckboxLeaderDirective extends CheckboxLeaderAbstract implements O
   checkChildChecked() {
     from(this.childChecked)
       .pipe(
-        every(ch => ch[1]),
+        every(ch => ch[1].call([])),
       )
       .subscribe(all => {
         if (all) { this.checkboxHost.checked = true; } else { this.checkboxHost.checked = false; }
@@ -30,9 +30,9 @@ export class CheckboxLeaderDirective extends CheckboxLeaderAbstract implements O
   }
 
   /** child checkbox 加入控管或更改值時 */
-  checkin(key: any, checked: boolean) {
-    // console.log(checked);
-    this.childChecked.set(key, checked);
+  checkin(key: any, ch: () => boolean) {
+    console.log(ch);
+    this.childChecked.set(key, ch);
     this.checkChildChecked();
   }
 

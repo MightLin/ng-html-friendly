@@ -1,4 +1,4 @@
-import { Directive, Input, OnInit, OnDestroy, Self, ElementRef } from '@angular/core';
+import { Directive, Input, OnInit, OnDestroy, Self, ElementRef, HostListener, Output } from '@angular/core';
 import { CheckboxLeaderDirective } from './checkbox-leader.directive';
 import { Subscription } from 'rxjs';
 import { CheckboxLeaderAbstract } from './checkbox-leader-abstract';
@@ -32,19 +32,20 @@ export class CheckboxLeaderItemDirective extends CheckboxLeaderAbstract implemen
     super(elementRef);
   }
 
+
   private init() {
     if (!this.leader) {
-      throw new Error('leader not ref.');
+      // throw new Error('leader not ref.');
     }
     else {
       // 註冊觀察 leader
       this.leaderListen = this.leader.command.asObservable().subscribe(ob => {
         this.changeChecked(ob);
       });
-      this.leader.checkin(this, this.checkboxHost.checked);
+      this.leader.checkin(this, () => this.checkboxHost.checked || this.checkboxHost.disabled);
       this.eventListen = this.eventObservable.subscribe(event => {
         // 更新目前值
-        this.leader.checkin(this, this.checkboxHost.checked);
+        this.leader.checkin(this, () => this.checkboxHost.checked || this.checkboxHost.disabled);
       });
     }
   }
