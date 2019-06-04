@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {FormControl} from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-demo-bin-checkbox',
@@ -7,12 +7,14 @@ import {FormControl} from '@angular/forms';
   styleUrls: ['./demo-bin-checkbox.component.css']
 })
 export class DemoBinCheckboxComponent implements OnInit {
-  constructor() {}
+  constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() { }
   variable: string;
 
-  variableComplex: {name: string};
+  initVariable: string = 'Batman';
+
+  variableComplex: { name: string };
 
   variableControl: FormControl = new FormControl('');
 }

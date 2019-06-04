@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-demo-checked-list',
@@ -6,10 +6,10 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./demo-checked-list.component.css']
 })
 export class DemoCheckedListComponent implements OnInit {
-  constructor() {}
+  constructor() { }
 
-  ngOnInit() {}
-  variableArr: string[] = [];
+  ngOnInit() { }
+  variableArr: string[] = ["3"];
   numArr: number[] = [];
   objArr: any[] = [];
 }
