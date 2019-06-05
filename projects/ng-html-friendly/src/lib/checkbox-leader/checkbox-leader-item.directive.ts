@@ -34,6 +34,7 @@ export class CheckboxLeaderItemDirective extends CheckboxLeaderAbstract implemen
   }
 
   ngAfterViewChecked() {
+    // console.log('ngAfterViewChecked')
     this.detectChanges();
   }
 
