@@ -50,6 +50,10 @@
 
 <hr>
 
+<app-test-observable></app-test-observable>
+
+<hr>
+
 <section>
   <legend>
     Empty
@@ -72,13 +76,3 @@
 </section>
 
 <hr>
-
-<section>
-  <legend>
-    Child Component
-  </legend>
-  <app-demo-child [head]='true' #headComponent></app-demo-child>
-  <app-demo-child [head]='false' [leader]="headComponent.checkleader">option1</app-demo-child>
-  <app-demo-child [head]='false' [leader]="headComponent.checkleader">option2</app-demo-child>
-  <app-demo-child [head]='false' [leader]="headComponent.checkleader">option3</app-demo-child>
-</section>

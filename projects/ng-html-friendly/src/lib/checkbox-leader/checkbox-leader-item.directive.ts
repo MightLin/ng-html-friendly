@@ -1,4 +1,4 @@
-import { Directive, Input, OnInit, OnDestroy, Self, ElementRef, HostListener, Output } from '@angular/core';
+import { Directive, Input, OnInit, OnDestroy, Self, ElementRef, HostListener, Output, AfterViewChecked } from '@angular/core';
 import { CheckboxLeaderDirective } from './checkbox-leader.directive';
 import { Subscription } from 'rxjs';
 import { CheckboxLeaderAbstract } from './checkbox-leader-abstract';
@@ -6,22 +6,19 @@ import { CheckboxLeaderAbstract } from './checkbox-leader-abstract';
 @Directive({
   selector: '[checkbox-leader-item]'
 })
-export class CheckboxLeaderItemDirective extends CheckboxLeaderAbstract implements OnInit, OnDestroy {
+export class CheckboxLeaderItemDirective extends CheckboxLeaderAbstract implements OnInit, OnDestroy, AfterViewChecked {
 
   private leaderListen: Subscription;
   private eventListen: Subscription;
-
-  //  leader checkbox
-  // @Input('checkbox-leader-item') leader: CheckboxLeaderDirective;
-  _leader: CheckboxLeaderDirective;
+  private _lastChecked = false;
+  private _leader: CheckboxLeaderDirective;
 
   @Input('checkbox-leader-item')
   set leader(value: CheckboxLeaderDirective) {
-    this._leader = value;
     this.destory();
+    this._leader = value;
     this.init();
   }
-
   get leader(): CheckboxLeaderDirective {
     return this._leader;
   }
@@ -32,6 +29,17 @@ export class CheckboxLeaderItemDirective extends CheckboxLeaderAbstract implemen
     super(elementRef);
   }
 
+  ngOnInit(): void {
+
+  }
+
+  ngAfterViewChecked() {
+    this.detectChanges();
+  }
+
+  ngOnDestroy(): void {
+    this.destory();
+  }
 
   private init() {
     if (!this.leader) {
@@ -42,11 +50,25 @@ export class CheckboxLeaderItemDirective extends CheckboxLeaderAbstract implemen
       this.leaderListen = this.leader.command.asObservable().subscribe(ob => {
         this.changeChecked(ob);
       });
-      this.leader.checkin(this, () => this.checkboxHost.checked || this.checkboxHost.disabled);
+      this.leader.checkin(this, this.getCurrentChecked());
       this.eventListen = this.eventObservable.subscribe(event => {
         // 更新目前值
-        this.leader.checkin(this, () => this.checkboxHost.checked || this.checkboxHost.disabled);
+        this.detectChanges();
       });
+    }
+  }
+
+  private getCurrentChecked() {
+    return this.checkboxHost.checked || this.checkboxHost.disabled;
+  }
+
+  private detectChanges() {
+    const current = this.getCurrentChecked();
+    // console.log('current:' + current);
+    // console.log('this._lastChecked:' + this._lastChecked);
+    if (current !== this._lastChecked) {
+      this.leader.checkin(this, current);
+      this._lastChecked = current;
     }
   }
 
@@ -56,14 +78,6 @@ export class CheckboxLeaderItemDirective extends CheckboxLeaderAbstract implemen
     if (this.eventListen) { this.eventListen.unsubscribe(); }
     // 退出 leader 控管列表
     if (this.leader) { this.leader.checkout(this); }
-  }
-
-  ngOnInit(): void {
-
-  }
-
-  ngOnDestroy(): void {
-    this.destory();
   }
 
   private changeChecked(checked: boolean) {

@@ -1,8 +1,0 @@
-<ng-container *ngIf="head">
-  <label><input type="checkbox" checkbox-leader #demo5="checkbox-leader">全選</label>
-</ng-container>
-<ng-container *ngIf="!head">
-  <label><input type="checkbox" [checkbox-leader-item]="leader">
-    <ng-content></ng-content>
-  </label>
-</ng-container>
