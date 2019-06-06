@@ -1,32 +1,27 @@
 import { Directive, Input, OnInit, OnDestroy, Self, ElementRef, HostListener, Output, AfterViewChecked } from '@angular/core';
 import { CheckboxLeaderDirective } from './checkbox-leader.directive';
 import { Subscription } from 'rxjs';
-import { CheckboxLeaderAbstract } from './checkbox-leader-abstract';
+import { CheckboxChild } from '../checkbox/checkbox-child';
+import { CheckboxParent } from '../checkbox/checkbox-parent';
 
 @Directive({
   selector: '[checkbox-leader-item]'
 })
-export class CheckboxLeaderItemDirective extends CheckboxLeaderAbstract implements OnInit, OnDestroy, AfterViewChecked {
+export class CheckboxLeaderItemDirective extends CheckboxChild implements OnInit, OnDestroy, AfterViewChecked {
 
-  private leaderListen: Subscription;
-  private eventListen: Subscription;
-  private _lastChecked = false;
-  private _leader: CheckboxLeaderDirective;
 
   @Input('checkbox-leader-item')
-  set leader(value: CheckboxLeaderDirective) {
-    this.destory();
-    this._leader = value;
-    this.init();
+  set leader(value: CheckboxParent) {
+    this.parent = value;
   }
-  get leader(): CheckboxLeaderDirective {
-    return this._leader;
+  get leader() {
+    return this.parent;
   }
 
   constructor(
     @Self() elementRef: ElementRef,
   ) {
-    super(elementRef);
+    super(elementRef.nativeElement);
   }
 
   ngOnInit(): void {
@@ -42,48 +37,5 @@ export class CheckboxLeaderItemDirective extends CheckboxLeaderAbstract implemen
     this.destory();
   }
 
-  private init() {
-    if (!this.leader) {
-      // throw new Error('leader not ref.');
-    }
-    else {
-      // 註冊觀察 leader
-      this.leaderListen = this.leader.command.asObservable().subscribe(ob => {
-        this.changeChecked(ob);
-      });
-      this.leader.checkin(this, this.getCurrentChecked());
-      this.eventListen = this.eventObservable.subscribe(event => {
-        // 更新目前值
-        this.detectChanges();
-      });
-    }
-  }
 
-  private getCurrentChecked() {
-    return this.checkboxHost.checked || this.checkboxHost.disabled;
-  }
-
-  private detectChanges() {
-    const current = this.getCurrentChecked();
-    // console.log('current:' + current);
-    // console.log('this._lastChecked:' + this._lastChecked);
-    if (current !== this._lastChecked) {
-      this.leader.checkin(this, current);
-      this._lastChecked = current;
-    }
-  }
-
-  private destory() {
-    // 取消觀察 leader
-    if (this.leaderListen) { this.leaderListen.unsubscribe(); }
-    if (this.eventListen) { this.eventListen.unsubscribe(); }
-    // 退出 leader 控管列表
-    if (this.leader) { this.leader.checkout(this); }
-  }
-
-  private changeChecked(checked: boolean) {
-    if (this.checkboxHost.checked !== checked) {
-      this.checkboxHost.click();
-    }
-  }
 }

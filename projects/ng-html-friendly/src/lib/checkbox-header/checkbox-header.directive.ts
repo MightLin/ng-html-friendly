@@ -17,13 +17,15 @@ import {
 import { from, Subscription, fromEvent } from 'rxjs';
 import { CheckboxHeaderContainerDirective } from './checkbox-header-container.directive';
 import { mergeMap, map, every, debounceTime } from 'rxjs/operators';
+import { CheckboxParent } from '../checkbox/checkbox-parent';
+import { CheckboxChild } from '../checkbox/checkbox-child';
 
 @Directive({
   // tslint:disable-next-line: directive-selector
   selector: '[checkHeader]',
   exportAs: 'checkHeader'
 })
-export class CheckboxHeaderDirective implements OnInit, AfterContentChecked, OnDestroy, DoCheck {
+export class CheckboxHeaderDirective extends CheckboxParent implements OnInit, AfterContentChecked, OnDestroy, DoCheck {
 
   // tslint:disable-next-line: no-input-rename
   @Input('checkHeader') checkHeaderName: string;
@@ -37,38 +39,29 @@ export class CheckboxHeaderDirective implements OnInit, AfterContentChecked, OnD
   }
   get dectTarget() { return this._dectTarget; }
 
-  // checkbox for all-check
-  checkboxHeader: HTMLInputElement;
-  // private checkboxHeaderSub: Subscription;
-
   // checkbox list
-  checkboxGroup: NodeListOf<HTMLInputElement>;
+  checkboxGroup: CheckboxChild[] = [];
 
-  private headListen: Subscription;
-  private groupClick: Subscription;
   private mustRefresh = false;
-  private differ: IterableDiffer<HTMLElement>;
+
+  //  用 checkbox child的 index+checked 組成字串判斷是否有變更
+  private differ: IterableDiffer<string>;
   constructor(
     @Self() private elementRef: ElementRef,
     @Inject(CheckboxHeaderContainerDirective) @Optional() @SkipSelf() private headerContainer: CheckboxHeaderContainerDirective,
     iterable: IterableDiffers
   ) {
+    super(elementRef.nativeElement);
     this.differ = iterable.find([]).create(null);
-    // console.log(this.headerContainer);
   }
 
   ngOnInit() {
-    this.checkboxHeader = this.elementRef.nativeElement;
-    this.registerCheckboxHeadEvent();
+    this.init();
   }
 
   ngOnDestroy(): void {
-    if (this.headListen) {
-      this.headListen.unsubscribe();
-    }
-    if (this.groupClick) {
-      this.groupClick.unsubscribe();
-    }
+    this.destoryChild();
+    this.destroy();
   }
 
   refresh() {
@@ -77,25 +70,23 @@ export class CheckboxHeaderDirective implements OnInit, AfterContentChecked, OnD
   }
 
   ngAfterContentChecked() {
-    // console.log('ngAfterContentChecked');
     if (this.mustRefresh) {
-      // console.log('ngAfterContentChecked');
       this.checkCheckboxGroup();
       this.mustRefresh = false;
     }
   }
 
   private checkCheckboxGroup(): void {
-    const newCheckbox = this.getCheckboxGroup();
-    const changes = this.differ.diff(Array.from(newCheckbox));
+    const newCheckbox = Array.from(this.getCheckboxGroup()).map(h => h);
+    const changes = this.differ.diff(newCheckbox.map((h, i) => i + "" + h.checked));
     // console.log('checkCheckboxGroup:' + newCheckbox.length);
     if (changes) {
-      // console.log('change old:' + ((this.checkboxGroup) ? this.checkboxGroup.length : 'null'));
-      this.checkboxGroup = newCheckbox;
-      this.registerCheckboxGroupEvent();
-      this.checkboxHeader.checked = null;
-      this.checkAll(false);
-      this.mustRefresh = false;
+      console.log('changes');
+      this.destoryChild();
+      this.checkboxGroup = newCheckbox.map(h => new CheckboxChild(h));
+      this.checkboxGroup.forEach(c => {
+        c.parent = this;
+      });
     }
   }
 
@@ -104,10 +95,9 @@ export class CheckboxHeaderDirective implements OnInit, AfterContentChecked, OnD
     this.refresh();
   }
 
-  private registerCheckboxHeadEvent() {
-    this.headListen = fromEvent(this.checkboxHeader, 'change').subscribe(() => {
-      // console.log(this.checkboxHeader.checked);
-      if (this.checkboxHeader.checked) { this.checkAll(true); } else { this.checkAll(false); }
+  private destoryChild() {
+    this.checkboxGroup.forEach(c => {
+      c.destory();
     });
   }
 
@@ -127,45 +117,45 @@ export class CheckboxHeaderDirective implements OnInit, AfterContentChecked, OnD
     }
   }
 
-  private registerCheckboxGroupEvent() {
-    if (this.groupClick) { this.groupClick.unsubscribe(); }
+  // private registerCheckboxGroupEvent() {
+  //   if (this.groupClick) { this.groupClick.unsubscribe(); }
 
-    // using rxjs/operators, not  rxjs/operators
-    this.groupClick =
-      from(this.checkboxGroup)
-        .pipe(
-          // switchMap(h => of(h)),
-          mergeMap(h => fromEvent(h, 'change')),
-          map(e => e.target as HTMLInputElement),
-          debounceTime(100)
-        )
-        .subscribe(s => {
-          this.checkStatus(s);
-        });
-  }
+  //   // using rxjs/operators, not  rxjs/operators
+  //   this.groupClick =
+  //     from(this.checkboxGroup)
+  //       .pipe(
+  //         // switchMap(h => of(h)),
+  //         mergeMap(h => fromEvent(h, 'change')),
+  //         map(e => e.target as HTMLInputElement),
+  //         debounceTime(100)
+  //       )
+  //       .subscribe(s => {
+  //         this.checkStatus(s);
+  //       });
+  // }
 
-  /** 檢查 checkbox Header 是否需要勾選 */
-  private checkStatus(chk: HTMLInputElement) {
-    if (!chk.checked) {
-      this.checkboxHeader.checked = null;
-    } else {
-      from(this.checkboxGroup)
-        .pipe(every(ch => ch.checked === true || ch.disabled))
-        .subscribe(all => {
-          if (all) { this.checkboxHeader.checked = true; } else { this.checkboxHeader.checked = false; }
-        });
-    }
-  }
+  // /** 檢查 checkbox Header 是否需要勾選 */
+  // private checkStatus(chk: HTMLInputElement) {
+  //   if (!chk.checked) {
+  //     this.checkboxHeader.checked = null;
+  //   } else {
+  //     from(this.checkboxGroup)
+  //       .pipe(every(ch => ch.checked === true || ch.disabled))
+  //       .subscribe(all => {
+  //         if (all) { this.checkboxHeader.checked = true; } else { this.checkboxHeader.checked = false; }
+  //       });
+  //   }
+  // }
 
 
-  /** 全選或取消全選 */
-  checkAll(checked: boolean) {
-    if (!this.checkboxGroup) { return; }
-    // console.log('checkAll:' + checked);
-    for (let i = 0; i < this.checkboxGroup.length; i++) {
-      if (this.checkboxGroup[i].checked !== checked) {
-        this.checkboxGroup[i].click();
-      }
-    }
-  }
+  // /** 全選或取消全選 */
+  // checkAll(checked: boolean) {
+  //   if (!this.checkboxGroup) { return; }
+  //   // console.log('checkAll:' + checked);
+  //   for (let i = 0; i < this.checkboxGroup.length; i++) {
+  //     if (this.checkboxGroup[i].checked !== checked) {
+  //       this.checkboxGroup[i].click();
+  //     }
+  //   }
+  // }
 }

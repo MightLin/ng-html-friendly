@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { CheckboxHeaderModule, CheckedListModule } from 'projects/ng-html-friendly/src';
 import { TestDynamicOptionComponent } from './test-dynamic-option/test-dynamic-option.component';
 import { TestRandomOptionComponent } from './test-random-option/test-random-option.component';
+import { TestObservableComponent } from './test-observable/test-observable.component';
 
 @NgModule({
   imports: [
@@ -20,6 +21,6 @@ import { TestRandomOptionComponent } from './test-random-option/test-random-opti
       }
     ])
   ],
-  declarations: [DemoCheckboxHeaderComponent, TestDynamicOptionComponent, TestRandomOptionComponent]
+  declarations: [DemoCheckboxHeaderComponent, TestDynamicOptionComponent, TestRandomOptionComponent, TestObservableComponent]
 })
 export class DemoCheckboxHeaderModule { }

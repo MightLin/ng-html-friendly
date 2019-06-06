@@ -1,8 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TestObservableComponent } from './test-observable.component';
-import { CheckboxLeaderDirective, CheckboxLeaderItemDirective, CheckedListDirective } from 'projects/ng-html-friendly/src';
+import { CheckboxHeaderDirective, CheckedListDirective } from 'projects/ng-html-friendly/src';
 import { FormsModule } from '@angular/forms';
+import { CheckboxHeaderContainerDirective } from 'projects/ng-html-friendly/src/lib/checkbox-header/checkbox-header-container.directive';
 
 describe('[CheckboxLeaderDirective]TestObservableComponent', () => {
   let component: TestObservableComponent;
@@ -11,7 +12,7 @@ describe('[CheckboxLeaderDirective]TestObservableComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [FormsModule],
-      declarations: [TestObservableComponent, CheckboxLeaderDirective, CheckboxLeaderItemDirective, CheckedListDirective]
+      declarations: [TestObservableComponent, CheckboxHeaderContainerDirective, CheckboxHeaderDirective, CheckedListDirective]
     })
       .compileComponents();
   }));
@@ -36,8 +37,6 @@ describe('[CheckboxLeaderDirective]TestObservableComponent', () => {
     await component.fakeApi();
     const allCk = element.querySelector('[checkbox-leader]') as HTMLInputElement;
     fixture.detectChanges();
-
     expect(allCk.checked).toBeTruthy();
-    console.log('abc:' + allCk.checked);
   });
 });
