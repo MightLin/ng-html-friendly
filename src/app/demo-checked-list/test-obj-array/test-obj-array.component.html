@@ -1,0 +1,6 @@
+<fieldset>
+  <legend>Object Array</legend>
+  <label *ngFor="let ch of opt">
+    <input type="checkbox" [value]="ch" [checkedList]="objArr" />{{ch.name}}</label>
+  <p>Your Ans: {{objArr|json}}</p>
+</fieldset>
