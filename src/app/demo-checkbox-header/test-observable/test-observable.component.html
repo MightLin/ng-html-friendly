@@ -4,9 +4,10 @@
   </legend>
   <button (click)="fakeApi()">take Api</button>
   <label>
-    <input type="checkbox" checkHeader="group" [dectTarget]="checkedList">全選</label>
+    <input type="checkbox" checkHeader="group1">全選</label>
   <label *ngFor="let ch of option">
-    <input type="checkbox" [disabled]="ch.alive == 0" group [value]="ch" [checkedList]="checkedList">{{ch.name}}</label>
+    <input class="test" type="checkbox" [disabled]="ch.alive == 0" group1 [value]="ch"
+      [checkedList]="checkedList">{{ch.name}}</label>
   <div>
     {{checkedList|json}}
   </div>

@@ -81,7 +81,7 @@ export class CheckboxHeaderDirective extends CheckboxParent implements OnInit, A
     const changes = this.differ.diff(newCheckbox.map((h, i) => i + "" + h.checked));
     // console.log('checkCheckboxGroup:' + newCheckbox.length);
     if (changes) {
-      console.log('changes');
+      // console.log('changes');
       this.destoryChild();
       this.checkboxGroup = newCheckbox.map(h => new CheckboxChild(h));
       this.checkboxGroup.forEach(c => {

@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TestObservableComponent } from './test-observable.component';
-import { CheckboxHeaderDirective, CheckedListDirective } from 'projects/ng-html-friendly/src';
+import { CheckedListDirective, CheckboxHeaderDirective } from 'projects/ng-html-friendly/src';
 import { FormsModule } from '@angular/forms';
 import { CheckboxHeaderContainerDirective } from 'projects/ng-html-friendly/src/lib/checkbox-header/checkbox-header-container.directive';
 
@@ -12,7 +12,7 @@ describe('[CheckboxHeaderDirective]TestObservableComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [FormsModule],
-      declarations: [TestObservableComponent, CheckboxHeaderContainerDirective, CheckboxHeaderDirective, CheckedListDirective]
+      declarations: [TestObservableComponent, CheckboxHeaderDirective, CheckboxHeaderContainerDirective, CheckedListDirective]
     })
       .compileComponents();
   }));
@@ -35,8 +35,17 @@ describe('[CheckboxHeaderDirective]TestObservableComponent', () => {
 
   it('after api result, must be setting', async () => {
     await component.fakeApi();
-    const allCk = element.querySelector('[checkbox-leader]') as HTMLInputElement;
     fixture.detectChanges();
+
+    const checkbox = element.querySelectorAll('input.test[type="checkbox"]') as NodeListOf<HTMLInputElement>;
+    expect(checkbox.length).toEqual(4);
+    for (let i = 0; i < checkbox.length; i++) {
+      const h = checkbox.item(i);
+      expect(h.checked || h.disabled).toBeTruthy();
+    }
+
+    const allCk = element.querySelector('[checkHeader]') as HTMLInputElement;
     expect(allCk.checked).toBeTruthy();
+
   });
 });

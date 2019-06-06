@@ -4,9 +4,13 @@ import { RouterModule } from '@angular/router';
 import { DemoCheckboxHeaderComponent } from './demo-checkbox-header.component';
 import { FormsModule } from '@angular/forms';
 import { CheckboxHeaderModule, CheckedListModule } from 'projects/ng-html-friendly/src';
-import { TestDynamicOptionComponent } from './test-dynamic-option/test-dynamic-option.component';
-import { TestRandomOptionComponent } from './test-random-option/test-random-option.component';
 import { TestObservableComponent } from './test-observable/test-observable.component';
+import { TestEmptyComponent } from './test-empty/test-empty.component';
+import { TestDisabledComponent } from './test-disabled/test-disabled.component';
+import { TestDynamicComponent } from './test-dynamic/test-dynamic.component';
+import { TestWithCheckedListComponent } from './test-with-checked-list/test-with-checked-list.component';
+import { TestNewArrComponent } from './test-new-arr/test-new-arr.component';
+
 
 @NgModule({
   imports: [
@@ -21,6 +25,7 @@ import { TestObservableComponent } from './test-observable/test-observable.compo
       }
     ])
   ],
-  declarations: [DemoCheckboxHeaderComponent, TestDynamicOptionComponent, TestRandomOptionComponent, TestObservableComponent]
+  declarations: [DemoCheckboxHeaderComponent, TestObservableComponent, TestEmptyComponent, TestDisabledComponent,
+    TestDynamicComponent, TestWithCheckedListComponent, TestNewArrComponent]
 })
 export class DemoCheckboxHeaderModule { }
