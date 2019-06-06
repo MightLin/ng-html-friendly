@@ -12,12 +12,9 @@ export class DemoCheckboxLeaderComponent implements OnInit {
     basicArr: [],
   };
 
-  demo2 = [8, 9, 10]
 
 
-  demo3 = [1, 2, 3];
 
-  demo3List = [2];
 
   demo4: any;
 
@@ -30,9 +27,6 @@ export class DemoCheckboxLeaderComponent implements OnInit {
   ngOnInit() {
   }
 
-  addDemo2() {
-    this.demo2.push(Math.floor(Math.random() * 9999));
-  }
 
 
   range(length) {

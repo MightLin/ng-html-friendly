@@ -1,7 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { from, of } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { of } from 'rxjs';
 import * as _ from 'lodash';
-import { CheckboxLeaderDirective } from 'projects/ng-html-friendly/src';
 import { delay } from 'rxjs/operators';
 @Component({
   selector: 'app-test-observable',
@@ -11,7 +10,7 @@ import { delay } from 'rxjs/operators';
 export class TestObservableComponent implements OnInit {
 
 
-  option: any[];
+  option: any[] = [];
 
   checkedList: any[] = [];
 
@@ -21,14 +20,16 @@ export class TestObservableComponent implements OnInit {
     // this.fakeApi();
   }
 
-  @ViewChild(CheckboxLeaderDirective) chk: CheckboxLeaderDirective;
-
   fakeApi() {
-    of(this.fakeApiResult).pipe(delay(500)).subscribe(item => {
-      this.option = item;
-      // this.checkedList = _.filter(item, m => m.alive == 1);
-      of(item).pipe(delay(500)).subscribe(it => {
-        this.checkedList = _.filter(it, m => m.alive == 1);
+    return new Promise((resolve) => {
+      of(this.fakeApiResult).pipe(delay(500)).subscribe(item => {
+        this.option = item;
+        // this.checkedList = _.filter(item, m => m.alive == 1);
+        of(item).pipe(delay(500)).subscribe(it => {
+          this.checkedList = _.filter(it, m => m.alive == 1);
+          resolve();
+        });
+
       });
     });
   }

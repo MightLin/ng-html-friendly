@@ -5,6 +5,10 @@ import { DemoCheckboxLeaderComponent } from './demo-checkbox-leader.component';
 import { CheckboxLeaderModule, CheckedListModule } from 'projects/ng-html-friendly/src';
 import { FormsModule } from '@angular/forms';
 import { TestObservableComponent } from './test-observable/test-observable.component';
+import { TestEmptyComponent } from './test-empty/test-empty.component';
+import { TestDisabledComponent } from './test-disabled/test-disabled.component';
+import { TestDynamicComponent } from './test-dynamic/test-dynamic.component';
+import { TestWithCheckedListComponent } from './test-with-checked-list/test-with-checked-list.component';
 
 @NgModule({
   imports: [
@@ -19,6 +23,6 @@ import { TestObservableComponent } from './test-observable/test-observable.compo
       }
     ])
   ],
-  declarations: [DemoCheckboxLeaderComponent, TestObservableComponent]
+  declarations: [DemoCheckboxLeaderComponent, TestObservableComponent, TestEmptyComponent, TestDisabledComponent, TestDynamicComponent, TestWithCheckedListComponent]
 })
 export class DemoCheckboxLeaderModule { }
