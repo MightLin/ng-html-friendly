@@ -59,14 +59,10 @@ describe('[CheckboxLeaderDirective]TestWithCheckedListComponent', () => {
   });
 
   it('after item cancel', async () => {
-
-
-
     const checkbox = element.querySelector('input.test[type="checkbox"]') as HTMLInputElement;
     const allCk = element.querySelector('[checkbox-leader]') as HTMLInputElement;
     expect(checkbox).toBeTruthy();
     checkbox.click();
-
 
     expect(allCk.checked).toBeFalsy();
     expect(component.demo3List.length).toEqual(2);

@@ -6,7 +6,7 @@
   <label>
     <input type="checkbox" checkbox-leader #ob="checkbox-leader">全選</label>
   <label *ngFor="let ch of option">
-    <input type="checkbox" [disabled]="ch.alive == 0" [checkbox-leader-item]="ob" [value]="ch"
+    <input class="test" type="checkbox" [disabled]="ch.alive == 0" [checkbox-leader-item]="ob" [value]="ch"
       [checkedList]="checkedList">{{ch.name}}</label>
   <div>
     {{checkedList|json}}

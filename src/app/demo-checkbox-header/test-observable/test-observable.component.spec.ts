@@ -5,7 +5,7 @@ import { CheckboxHeaderDirective, CheckedListDirective } from 'projects/ng-html-
 import { FormsModule } from '@angular/forms';
 import { CheckboxHeaderContainerDirective } from 'projects/ng-html-friendly/src/lib/checkbox-header/checkbox-header-container.directive';
 
-describe('[CheckboxLeaderDirective]TestObservableComponent', () => {
+describe('[CheckboxHeaderDirective]TestObservableComponent', () => {
   let component: TestObservableComponent;
   let fixture: ComponentFixture<TestObservableComponent>;
   let element: HTMLElement;

@@ -41,9 +41,10 @@ describe('[CheckboxLeaderDirective]TestDisabledComponent', () => {
     const allCk = element.querySelector('[checkbox-leader]') as HTMLInputElement;
     allCk.click();
 
+    expect(checkbox.length).toBeGreaterThan(0);
     for (let i = 0; i < checkbox.length; i++) {
       const h = checkbox.item(i);
-      expect(h.checked || h.disabled).toBeTruthy();
+      expect(h.checked || h.disabled).toBeTruthy('must all fase');
     }
 
     expect(allCk.checked).toBeTruthy();
@@ -53,7 +54,7 @@ describe('[CheckboxLeaderDirective]TestDisabledComponent', () => {
     const checkbox = element.querySelectorAll('input.test[type="checkbox"]') as NodeListOf<HTMLInputElement>;
     const allCk = element.querySelector('[checkbox-leader]') as HTMLInputElement;
 
-
+    expect(checkbox.length).toBeGreaterThan(0);
     for (let i = 0; i < checkbox.length; i++) {
       const h = checkbox.item(i);
       h.click();

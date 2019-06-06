@@ -9,6 +9,7 @@ import { TestEmptyComponent } from './test-empty/test-empty.component';
 import { TestDisabledComponent } from './test-disabled/test-disabled.component';
 import { TestDynamicComponent } from './test-dynamic/test-dynamic.component';
 import { TestWithCheckedListComponent } from './test-with-checked-list/test-with-checked-list.component';
+import { TestNewArrComponent } from './test-new-arr/test-new-arr.component';
 
 @NgModule({
   imports: [
@@ -23,6 +24,6 @@ import { TestWithCheckedListComponent } from './test-with-checked-list/test-with
       }
     ])
   ],
-  declarations: [DemoCheckboxLeaderComponent, TestObservableComponent, TestEmptyComponent, TestDisabledComponent, TestDynamicComponent, TestWithCheckedListComponent]
+  declarations: [DemoCheckboxLeaderComponent, TestObservableComponent, TestEmptyComponent, TestDisabledComponent, TestDynamicComponent, TestWithCheckedListComponent, TestNewArrComponent]
 })
 export class DemoCheckboxLeaderModule { }

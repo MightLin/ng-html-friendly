@@ -34,10 +34,17 @@ describe('[CheckboxLeaderDirective]TestObservableComponent', () => {
 
   it('after api result, must be setting', async () => {
     await component.fakeApi();
-    const allCk = element.querySelector('[checkbox-leader]') as HTMLInputElement;
     fixture.detectChanges();
 
+    const checkbox = element.querySelectorAll('input.test[type="checkbox"]') as NodeListOf<HTMLInputElement>;
+    expect(checkbox.length).toEqual(4);
+    for (let i = 0; i < checkbox.length; i++) {
+      const h = checkbox.item(i);
+      expect(h.checked || h.disabled).toBeTruthy();
+    }
+
+    const allCk = element.querySelector('[checkbox-leader]') as HTMLInputElement;
     expect(allCk.checked).toBeTruthy();
-    console.log('abc:' + allCk.checked);
+
   });
 });

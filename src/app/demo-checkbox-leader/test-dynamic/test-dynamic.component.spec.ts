@@ -33,6 +33,7 @@ describe('[CheckboxLeaderDirective]TestDynamicComponent', () => {
     allCk.click();
 
     expect(allCk.checked).toBeTruthy();
+    expect(checkbox.length).toBeGreaterThan(0);
     for (let i = 0; i < checkbox.length; i++) {
       const h = checkbox.item(i);
       expect(h.checked).toBeTruthy();
@@ -42,7 +43,10 @@ describe('[CheckboxLeaderDirective]TestDynamicComponent', () => {
     add.click();
     fixture.detectChanges();
     expect(allCk.checked).toBeFalsy();
-
+    for (let i = 0; i < checkbox.length; i++) {
+      const h = checkbox.item(i);
+      expect(h.checked).toBeTruthy();
+    }
   });
 
 });
