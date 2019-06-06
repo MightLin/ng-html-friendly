@@ -116,46 +116,4 @@ export class CheckboxHeaderDirective extends CheckboxParent implements OnInit, A
       ) as NodeListOf<HTMLInputElement>;
     }
   }
-
-  // private registerCheckboxGroupEvent() {
-  //   if (this.groupClick) { this.groupClick.unsubscribe(); }
-
-  //   // using rxjs/operators, not  rxjs/operators
-  //   this.groupClick =
-  //     from(this.checkboxGroup)
-  //       .pipe(
-  //         // switchMap(h => of(h)),
-  //         mergeMap(h => fromEvent(h, 'change')),
-  //         map(e => e.target as HTMLInputElement),
-  //         debounceTime(100)
-  //       )
-  //       .subscribe(s => {
-  //         this.checkStatus(s);
-  //       });
-  // }
-
-  // /** 檢查 checkbox Header 是否需要勾選 */
-  // private checkStatus(chk: HTMLInputElement) {
-  //   if (!chk.checked) {
-  //     this.checkboxHeader.checked = null;
-  //   } else {
-  //     from(this.checkboxGroup)
-  //       .pipe(every(ch => ch.checked === true || ch.disabled))
-  //       .subscribe(all => {
-  //         if (all) { this.checkboxHeader.checked = true; } else { this.checkboxHeader.checked = false; }
-  //       });
-  //   }
-  // }
-
-
-  // /** 全選或取消全選 */
-  // checkAll(checked: boolean) {
-  //   if (!this.checkboxGroup) { return; }
-  //   // console.log('checkAll:' + checked);
-  //   for (let i = 0; i < this.checkboxGroup.length; i++) {
-  //     if (this.checkboxGroup[i].checked !== checked) {
-  //       this.checkboxGroup[i].click();
-  //     }
-  //   }
-  // }
 }
