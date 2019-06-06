@@ -5,6 +5,9 @@ import { DemoCheckedListComponent } from './demo-checked-list.component';
 import { CheckedListModule } from 'projects/ng-html-friendly/src';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
+import { TestObjArrayComponent } from './test-obj-array/test-obj-array.component';
+import { TestVarArrayComponent } from './test-var-array/test-var-array.component';
+import { TestObservableComponent } from './test-observable/test-observable.component';
 
 @NgModule({
   imports: [
@@ -17,6 +20,6 @@ import { FormsModule } from '@angular/forms';
       }
     ])
   ],
-  declarations: [DemoCheckedListComponent]
+  declarations: [DemoCheckedListComponent, TestObjArrayComponent, TestVarArrayComponent, TestObservableComponent]
 })
 export class DemoCheckedListModule { }

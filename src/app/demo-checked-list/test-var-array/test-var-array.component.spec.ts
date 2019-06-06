@@ -1,27 +1,28 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DemoCheckedListComponent } from './demo-checked-list.component';
+import { TestVarArrayComponent } from './test-var-array.component';
 import { CheckedListDirective } from 'projects/ng-html-friendly/src';
 import { FormsModule } from '@angular/forms';
 
-describe('DemoCheckedListComponent', () => {
-  let component: DemoCheckedListComponent;
-  let fixture: ComponentFixture<DemoCheckedListComponent>;
+describe('TestVarArrayComponent', () => {
+  let component: TestVarArrayComponent;
+  let fixture: ComponentFixture<TestVarArrayComponent>;
   let element: HTMLElement;
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [FormsModule],
-      declarations: [DemoCheckedListComponent, CheckedListDirective]
+      declarations: [TestVarArrayComponent, CheckedListDirective]
     })
       .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DemoCheckedListComponent);
+    fixture = TestBed.createComponent(TestVarArrayComponent);
     component = fixture.componentInstance;
     element = fixture.nativeElement;
     fixture.detectChanges();
   });
+
 
   it('should create', () => {
     expect(component).toBeTruthy();

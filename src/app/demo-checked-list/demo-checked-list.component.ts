@@ -9,7 +9,7 @@ export class DemoCheckedListComponent implements OnInit {
   constructor() { }
 
   ngOnInit() { }
-  variableArr: string[] = ["3"];
+
   numArr: number[] = [];
-  objArr: any[] = [];
+
 }
