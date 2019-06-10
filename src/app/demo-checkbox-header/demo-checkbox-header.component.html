@@ -1,39 +1,23 @@
-<app-test-random-option></app-test-random-option>
+<app-test-new-arr></app-test-new-arr>
 
 <hr>
 
-
-
-
-<app-test-dynamic-option></app-test-dynamic-option>
-
-
+<app-test-dynamic></app-test-dynamic>
 
 <hr>
 
-<section checkHeaderContainer>
-  <legend>
-    With CheckedList
-  </legend>
-  <label>
-    <input type="checkbox" checkHeader="group3">全選</label>
-  <label *ngFor="let ch of demo3">
-    <input type="checkbox" group3 [value]="ch" [checkedList]="demo3List">{{ch}}</label>
-  <div>
-    {{demo3List|json}}
-  </div>
-</section>
-
+<app-test-with-checked-list></app-test-with-checked-list>
 
 <hr>
 
-<section checkHeaderContainer>
-  <legend>
-    Empty
-  </legend>
-  <label>
-    <input type="checkbox" checkHeader="group4">全選</label>
+<app-test-observable></app-test-observable>
 
-</section>
+<hr>
+
+<app-test-empty></app-test-empty>
+
+<hr>
+
+<app-test-disabled></app-test-disabled>
 
 <hr>

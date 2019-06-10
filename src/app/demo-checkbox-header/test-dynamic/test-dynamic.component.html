@@ -1,0 +1,13 @@
+<section checkHeaderContainer>
+  <legend>
+    Add Checkbox
+  </legend>
+  <div>
+    <button id="add" (click)="addDemo2()">Add one item</button>
+  </div>
+  <label>
+    <input type="checkbox" checkHeader="group1">全選</label>
+  <label *ngFor="let ch of demo2">
+    <input class="test" type="checkbox" group1 [value]="ch">{{ch}}</label>
+
+</section>

@@ -2,16 +2,17 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TestDynamicComponent } from './test-dynamic.component';
 import { FormsModule } from '@angular/forms';
-import { CheckboxLeaderDirective, CheckboxLeaderItemDirective, CheckedListDirective } from 'projects/ng-html-friendly/src';
+import { CheckedListDirective, CheckboxHeaderDirective } from 'projects/ng-html-friendly/src';
+import { CheckboxHeaderContainerDirective } from 'projects/ng-html-friendly/src/lib/checkbox-header/checkbox-header-container.directive';
 
-describe('[CheckboxLeaderDirective]TestDynamicComponent', () => {
+describe('[CheckboxHeaderDirective]TestDynamicComponent', () => {
   let component: TestDynamicComponent;
   let fixture: ComponentFixture<TestDynamicComponent>;
   let element: HTMLElement;
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [FormsModule],
-      declarations: [TestDynamicComponent, CheckboxLeaderDirective, CheckboxLeaderItemDirective, CheckedListDirective]
+      declarations: [TestDynamicComponent, CheckboxHeaderDirective, CheckboxHeaderContainerDirective, CheckedListDirective]
     })
       .compileComponents();
   }));
@@ -28,7 +29,7 @@ describe('[CheckboxLeaderDirective]TestDynamicComponent', () => {
 
   it('item all check', async () => {
     const checkbox = element.querySelectorAll('input.test[type="checkbox"]') as NodeListOf<HTMLInputElement>;
-    const allCk = element.querySelector('[checkbox-leader]') as HTMLInputElement;
+    const allCk = element.querySelector('[checkHeader]') as HTMLInputElement;
 
     allCk.click();
 
