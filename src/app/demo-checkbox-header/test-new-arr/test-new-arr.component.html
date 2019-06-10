@@ -4,11 +4,11 @@
   </legend>
   <div>
     checkbox count <input type="text" [(ngModel)]="demo1.basicCount">
-    <button (click)="newArr1()">build new Arr</button>
+    <button id="add" (click)="newArr1()">build new Arr</button>
   </div>
   <label>
-    <input type="checkbox" checkHeader="group1" [dectTarget]="demo1.basicArr">全選</label>
+    <input type="checkbox" checkHeader="group1">全選</label>
   <label *ngFor="let e of demo1.basicArr">
-    <input type="checkbox" group1 value="e">{{e}}</label>
+    <input type="checkbox" class="test" group1>{{e}}</label>
 
 </section>

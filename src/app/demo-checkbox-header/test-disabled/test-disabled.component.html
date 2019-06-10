@@ -1,0 +1,9 @@
+<section checkHeaderContainer>
+  <legend>
+    Disabled
+  </legend>
+  <label>
+    <input type="checkbox" checkHeader="group1">全選</label>
+  <label *ngFor="let ch of [1,2,3]">
+    <input class="test" type="checkbox" [disabled]="ch==3" group1 [value]="ch">{{ch}}</label>
+</section>

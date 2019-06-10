@@ -1,17 +1,4 @@
-<section>
-  <legend>
-    Basic Checkbox
-  </legend>
-  <div>
-    checkbox count <input type="text" [(ngModel)]="demo1.basicCount">
-    <button (click)="newArr1()">build new Arr</button>
-  </div>
-  <label>
-    <input type="checkbox" checkbox-leader #leader1="checkbox-leader">全選</label>
-  <label *ngFor="let e of demo1.basicArr">
-    <input type="checkbox" [checkbox-leader-item]="leader1">{{e}}</label>
-
-</section>
+<app-test-new-arr></app-test-new-arr>
 
 <hr>
 

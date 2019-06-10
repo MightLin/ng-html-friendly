@@ -2,16 +2,17 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TestWithCheckedListComponent } from './test-with-checked-list.component';
 import { FormsModule } from '@angular/forms';
-import { CheckboxLeaderDirective, CheckboxLeaderItemDirective, CheckedListDirective } from 'projects/ng-html-friendly/src';
+import { CheckedListDirective, CheckboxHeaderDirective } from 'projects/ng-html-friendly/src';
+import { CheckboxHeaderContainerDirective } from 'projects/ng-html-friendly/src/lib/checkbox-header/checkbox-header-container.directive';
 
-describe('[CheckboxLeaderDirective]TestWithCheckedListComponent', () => {
+describe('[CheckboxHeaderDirective]TestWithCheckedListComponent', () => {
   let component: TestWithCheckedListComponent;
   let fixture: ComponentFixture<TestWithCheckedListComponent>;
   let element: HTMLElement;
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [FormsModule],
-      declarations: [TestWithCheckedListComponent, CheckboxLeaderDirective, CheckboxLeaderItemDirective, CheckedListDirective]
+      declarations: [TestWithCheckedListComponent, CheckboxHeaderDirective, CheckboxHeaderContainerDirective, CheckedListDirective]
     })
       .compileComponents();
   }));
@@ -45,7 +46,7 @@ describe('[CheckboxLeaderDirective]TestWithCheckedListComponent', () => {
 
   it('after cancel allCheck', async () => {
     const checkbox = element.querySelectorAll('input.test[type="checkbox"]') as NodeListOf<HTMLInputElement>;
-    const allCk = element.querySelector('[checkbox-leader]') as HTMLInputElement;
+    const allCk = element.querySelector('[checkHeader]') as HTMLInputElement;
     allCk.click();
 
     expect(checkbox.length).toBeGreaterThan(0);
@@ -60,10 +61,10 @@ describe('[CheckboxLeaderDirective]TestWithCheckedListComponent', () => {
 
   it('after item cancel', async () => {
     const checkbox = element.querySelector('input.test[type="checkbox"]') as HTMLInputElement;
-    const allCk = element.querySelector('[checkbox-leader]') as HTMLInputElement;
+    const allCk = element.querySelector('[checkHeader]') as HTMLInputElement;
     expect(checkbox).toBeTruthy();
     checkbox.click();
-
+    fixture.detectChanges();
     expect(allCk.checked).toBeFalsy();
     expect(component.demo3List.length).toEqual(2);
   });

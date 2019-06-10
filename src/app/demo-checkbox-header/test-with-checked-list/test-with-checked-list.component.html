@@ -1,0 +1,12 @@
+<section checkHeaderContainer>
+  <legend>
+    With CheckedList
+  </legend>
+  <label>
+    <input type="checkbox" checkHeader="group1">全選</label>
+  <label *ngFor="let ch of demo3">
+    <input class="test" type="checkbox" group1 [value]="ch" [checkedList]="demo3List">{{ch}}</label>
+  <div>
+    {{demo3List|json}}
+  </div>
+</section>
