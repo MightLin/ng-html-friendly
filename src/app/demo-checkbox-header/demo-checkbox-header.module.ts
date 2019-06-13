@@ -10,6 +10,9 @@ import { TestDisabledComponent } from './test-disabled/test-disabled.component';
 import { TestDynamicComponent } from './test-dynamic/test-dynamic.component';
 import { TestWithCheckedListComponent } from './test-with-checked-list/test-with-checked-list.component';
 import { TestNewArrComponent } from './test-new-arr/test-new-arr.component';
+import { TestTemplateComponent } from './test-template/test-template.component';
+import { TestChildComponent } from './test-child/test-child.component';
+import { TestColumnDirective } from './test-column.directive';
 
 
 @NgModule({
@@ -25,7 +28,9 @@ import { TestNewArrComponent } from './test-new-arr/test-new-arr.component';
       }
     ])
   ],
-  declarations: [DemoCheckboxHeaderComponent, TestObservableComponent, TestEmptyComponent, TestDisabledComponent,
-    TestDynamicComponent, TestWithCheckedListComponent, TestNewArrComponent]
+  declarations: [
+    DemoCheckboxHeaderComponent, TestObservableComponent, TestEmptyComponent,
+    TestDisabledComponent, TestDynamicComponent, TestWithCheckedListComponent,
+    TestNewArrComponent, TestTemplateComponent, TestChildComponent, TestColumnDirective]
 })
 export class DemoCheckboxHeaderModule { }

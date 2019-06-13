@@ -1,0 +1,6 @@
+<div>
+  <ng-container *ngTemplateOutlet="column.th"></ng-container>
+  <ng-container *ngFor="let ch of arr">
+    <ng-container *ngTemplateOutlet="column.td;context: {data:ch}"></ng-container>
+  </ng-container>
+</div>
