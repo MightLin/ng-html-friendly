@@ -22,6 +22,16 @@ export class TestNewArrComponent implements OnInit {
     this.demo1.basicArr = this.range(this.demo1.basicCount);
   }
 
+  buildSameArr(){
+    const a = [];
+    this.demo1.basicArr.forEach(element => {
+      a.push(element);
+    });
+    console.log(a);
+    this.demo1.basicArr = a;
+  }
+
+
 
   range(length) {
     return Array.apply(null, { length: length }).map((v, i) => Math.floor(Math.random() * 60));

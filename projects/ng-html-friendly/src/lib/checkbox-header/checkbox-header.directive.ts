@@ -45,7 +45,7 @@ export class CheckboxHeaderDirective extends CheckboxParent implements OnInit, A
   private mustRefresh = false;
 
   //  用 checkbox child的 index+checked 組成字串判斷是否有變更
-  private differ: IterableDiffer<string>;
+  private differ: IterableDiffer<HTMLInputElement>;
   constructor(
     @Self() private elementRef: ElementRef,
     @Inject(CheckboxHeaderContainerDirective) @Optional() @SkipSelf() private headerContainer: CheckboxHeaderContainerDirective,
@@ -78,7 +78,7 @@ export class CheckboxHeaderDirective extends CheckboxParent implements OnInit, A
 
   private checkCheckboxGroup(): void {
     const newCheckbox = Array.from(this.getCheckboxGroup()).map(h => h);
-    const changes = this.differ.diff(newCheckbox.map((h, i) => i + "" + h.checked));
+    const changes = this.differ.diff(newCheckbox);
     // console.log('checkCheckboxGroup:' + newCheckbox.length);
     if (changes) {
       // console.log('changes');
