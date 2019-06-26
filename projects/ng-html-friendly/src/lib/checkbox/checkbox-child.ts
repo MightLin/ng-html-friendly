@@ -7,7 +7,7 @@ export class CheckboxChild extends Checkbox {
 
   private leaderListen: Subscription;
   private eventListen: Subscription;
-  private _lastChecked = false;
+  private _lastChecked = undefined;
   private _parent: CheckboxParent;
 
   constructor(element: HTMLInputElement) {
@@ -46,9 +46,10 @@ export class CheckboxChild extends Checkbox {
 
   detectChanges() {
     const current = this.getCurrentChecked();
-    // console.log('current:' + current);
-    // console.log('this._lastChecked:' + this._lastChecked);
+    console.log('current:' + current);
+    console.log('this._lastChecked:' + this._lastChecked);
     if (current !== this._lastChecked) {
+      // console.log('checkin');
       this._parent.checkin(this, current);
       this._lastChecked = current;
     }
