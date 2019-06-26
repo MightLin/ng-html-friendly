@@ -14,7 +14,7 @@ import { isArray } from 'util';
 })
 export class CheckedListDirective implements OnInit, DoCheck {
   ngDoCheck(): void {
-    // this.checkContain();
+    this.checkContain();
   }
 
   checkContain() {

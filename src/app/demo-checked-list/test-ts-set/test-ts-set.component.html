@@ -1,0 +1,9 @@
+<fieldset>
+  <legend>Button Set CheckedList</legend>
+  <label>
+    <input type="checkbox" [value]="model" [checkedList]="arr" />1</label>
+  <br>
+  {{arr|json}}
+  <button id="add" (click)="add()">Add to checkedList</button>
+  <button (click)="remove()">Remove to checkedList</button>
+</fieldset>

@@ -122,6 +122,28 @@ describe('[CheckboxHeaderDirective]TestNewArrComponent', () => {
     expect(allCk.checked).toBeFalsy();
   });
 
+  it('build same count new arr', async () => {
+    const add = element.querySelector('#add') as HTMLInputElement;
+    add.click();
+
+    fixture.detectChanges();
+
+    add.click();
+
+    fixture.detectChanges();
+
+    const checkbox = getCheckbox();
+    const allCk = element.querySelector('[checkHeader]') as HTMLInputElement;
+
+    allCk.click();
+
+    expect(allCk.checked).toBeTruthy();
+    for (let i = 0; i < checkbox.length; i++) {
+      const h = checkbox.item(i);
+      expect(h.checked).toBeTruthy();
+    }
+  });
+
   function getCheckbox() {
     return element.querySelectorAll('input.test[type="checkbox"]') as NodeListOf<HTMLInputElement>;
   }

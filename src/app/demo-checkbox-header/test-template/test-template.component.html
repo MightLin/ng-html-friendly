@@ -1,0 +1,17 @@
+<section>
+  <legend>
+    Template
+  </legend>
+
+  <app-test-child [arr]="[3,4,5]" checkHeaderContainer>
+    <ng-container testColumn>
+      <ng-template th>
+        <label> <input type="checkbox" checkHeader="group1">全選</label>
+      </ng-template>
+      <ng-template td let-input>
+        <label><input class="test" type="checkbox" group1>{{input}}</label>
+      </ng-template>
+    </ng-container>
+  </app-test-child>
+
+</section>

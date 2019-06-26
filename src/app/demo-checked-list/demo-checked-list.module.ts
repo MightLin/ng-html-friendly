@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { TestObjArrayComponent } from './test-obj-array/test-obj-array.component';
 import { TestVarArrayComponent } from './test-var-array/test-var-array.component';
 import { TestObservableComponent } from './test-observable/test-observable.component';
+import { TestTsSetComponent } from './test-ts-set/test-ts-set.component';
 
 @NgModule({
   imports: [
@@ -20,6 +21,6 @@ import { TestObservableComponent } from './test-observable/test-observable.compo
       }
     ])
   ],
-  declarations: [DemoCheckedListComponent, TestObjArrayComponent, TestVarArrayComponent, TestObservableComponent]
+  declarations: [DemoCheckedListComponent, TestObjArrayComponent, TestVarArrayComponent, TestObservableComponent, TestTsSetComponent]
 })
 export class DemoCheckedListModule { }
